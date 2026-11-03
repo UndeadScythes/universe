@@ -1,28 +1,35 @@
 \section{Language}
 \label{sec:language}
 
+\subsection{Primitive symbols}
 \[
     \in,\quad \forall,\quad \nor
 \]
 
-\section{Spelling}
-
+\subsection{Formation rules}
 \begin{align*}
     &{\in}ab \\
     &{\forall}aP \\
     &{\nor}PQ
 \end{align*}
 
-\section{Shorthand}
-
+\subsection{Notational conventions}
+\subsubsection{Infix notation}
 \begin{align*}
     a \in b &\coloneqq {\in}ab \\
     \forall a: P &\coloneqq {\forall}aP \\
     P \nor Q &\coloneqq {\nor}PQ
 \end{align*}
 
-\section{Extensions}
+\subsubsection{Logical connectives}
+\begin{align*}
+    \neg a &\coloneqq a \nor a \\
+    a \wedge b &\coloneqq \neg a \nor \neg b \\
+    a \vee b &\coloneqq \neg (a \nor b) \\
+    a \Rightarrow b &\coloneqq \neg a \vee b
+\end{align*}
 
+\subsubsection{Quantifier notation}
 \begin{align*}
     \forall a \in b: P &\coloneqq \forall a: (a \in b \Rightarrow P) \\
     \forall a, b \in c: P &\coloneqq \forall a \in c: \forall b \in c: P \\
