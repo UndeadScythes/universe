@@ -2,5 +2,29 @@
 \label{sec:language}
 
 \[
-    \nor,\quad \forall,\quad \in
+    \in,\quad \forall,\quad \nor
 \]
+
+\section{Spelling}
+
+\begin{align*}
+    &{\in}ab \\
+    &{\forall}aP \\
+    &{\nor}PQ
+\end{align*}
+
+\section{Shorthand}
+
+\begin{align*}
+    a \in b &\coloneqq {\in}ab \\
+    \forall a: P &\coloneqq {\forall}aP \\
+    P \nor Q &\coloneqq {\nor}PQ
+\end{align*}
+
+\section{Extensions}
+
+\begin{align*}
+    \forall a \in b: P &\coloneqq \forall a: (a \in b \Rightarrow P) \\
+    \forall a, b \in c: P &\coloneqq \forall a \in c: \forall b \in c: P \\
+    \forall a \in b; c \in d: P &\coloneqq \forall a \in b: \forall c \in d: P
+\end{align*}
