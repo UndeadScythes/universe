@@ -1,10 +1,31 @@
 \section{Inference}
 \label{sec:inference}
 
-\subsection{Rules of inference}
+\subsection{Assumption}
+\[\inferrule{ }{[P]}\]
 
-% These left commented until I know precisely which ones I need.
-%\[\inferrule{P \\ Q}{P \wedge Q} \quad ({\wedge}I)\]
-%\[\inferrule{P \wedge Q}{P} \quad ({\wedge}E)\]
-%\[\inferrule{P \\ P \Rightarrow Q}{Q} \quad ({\Rightarrow}E)\]
-%\[\inferrule{[P] \\\\ \vdots \\\\ Q}{P \Rightarrow Q}\]
+\subsection{Conjunction}
+\[\inferrule{P \\ Q}{P \wedge Q} \quad ({\wedge}I)\]
+\[\inferrule{P \wedge Q}{P} \quad \inferrule{P \wedge Q}{Q} \quad ({\wedge}E)\]
+
+\begin{align*}
+    [P \wedge Q] \\
+    P \\
+    Q \\
+    Q \wedge P
+\end{align*}
+
+\subsection{Implication}
+\[\inferrule{P \\ P \Rightarrow Q}{Q} \quad ({\Rightarrow}E)\]
+\[\inferrule{[P] \\\\ \vdots \\\\ Q}{P \Rightarrow Q}\]
+
+\[(P \wedge Q) \Rightarrow (Q \wedge P)\]
+
+\subsection{Classics}
+\[\inferrule{\neg\neg P}{P} \quad ({\neg}{\neg} E)\]
+
+\subsection{Quantifiers}
+\[\inferrule{\forall a: P\langle a \rangle}{P\langle b \rangle} \quad ({\forall}E)\]
+\[\inferrule{P\langle a \rangle}{\forall a: P\langle a \rangle} \quad ({\forall}I)\]
+\[\inferrule{P\langle a \rangle}{\exists b \langle b \rangle} \quad ({\exists}I)\]
+% Any notion of bound and free variables above is implicit - no further explanation of these concepts is provided.
