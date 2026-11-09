@@ -2,32 +2,44 @@
 \label{sec:inference}
 
 \subsection{Contradiction}
-\[\inferrule{P \\ P \nor P}{\bot} \quad ({\nor}?1)\]
 \[\inferrule{[P] \cdots \bot \\ [Q] \cdots \bot}{P \nor Q} \quad ({\nor}I)\]
-\[\inferrule{P \nor Q \\ P}{\bot} \quad \inferrule{P \nor Q \\ Q}{\bot} \quad ({\nor}?2)\]
+\[\inferrule{P \nor Q \\ P}{\bot} \quad \inferrule{P \nor Q \\ Q}{\bot} \quad ({\nor}E)\]
 \[\inferrule{\bot}{P} \quad ({\bot}E)\]
 \[\inferrule{[P \nor P] \cdots \bot}{P} \quad (RAA)\]
 
-\begin{align}
-    [P \wedge Q] &\quad () \label{a}\\
-    (P \nor P) \nor (Q \nor Q) &\quad (\text{def})\eqref{a} \label{b}\\
-    [P \nor P] &\quad () \label{c}\\
-    \bot &\quad ({\nor}?2)\eqref{b} \label{d}\\
-    P &\quad (RAA)\eqref{c}\eqref{d}
-\end{align}
+\subsection{Conjunction}
+\begin{align*}
+    P &\quad (\text{prem}) \\
+    Q &\quad (\text{prem}) \\
+    [P \nor P] &\quad (\text{assm}) \\
+    \bot &\quad ({\nor}E) \\
+    [Q \nor Q] &\quad (\text{assm}) \\
+    \bot &\quad ({\nor}E) \\
+    (P \nor P) \nor (Q \nor Q) &\quad ({\nor}I)
+\end{align*}
+
+\[\inferrule{P \\ Q}{P \wedge Q} \quad ({\wedge}I)\]
+
+\begin{align*}
+    P \wedge Q &\quad (\text{prem})\\
+    (P \nor P) \nor (Q \nor Q) &\quad (\text{def})\\
+    [P \nor P] &\quad (\text{assm})\\
+    \bot &\quad ({\nor}E)\\
+    P &\quad (RAA)
+\end{align*}
+
+\begin{align*}
+    P \wedge Q &\quad (\text{prem})\\
+    (P \nor P) \nor (Q \nor Q) &\quad (\text{def})\\
+    [Q \nor Q] &\quad (\text{assm})\\
+    \bot &\quad ({\nor}E)\\
+    Q &\quad (RAA)
+\end{align*}
 
 % Therefore, wizardry?
-\[\inferrule{P \wedge Q}{P}\]
+\[\inferrule{P \wedge Q}{P} \quad \inferrule{P \wedge Q}{Q} \quad ({\wedge}E)\]
 
 % EVERYTHING BELOW THIS LINE IS LIKELY TO VANISH AT SOME POINT - CONSUMED OR DERIVED FROM THE NOR STUFFS ABOVE.
-
-\subsection{Assumption}
-\[\inferrule{ }{[P]}\]
-% The brackets here are implicit to an open assumption. No forgiveness.
-
-\subsection{Conjunction}
-\[\inferrule{P \\ Q}{P \wedge Q} \quad ({\wedge}I)\]
-\[\inferrule{P \wedge Q}{P} \quad \inferrule{P \wedge Q}{Q} \quad ({\wedge}E)\]
 
 \begin{align*}
     [P \wedge Q] \\
