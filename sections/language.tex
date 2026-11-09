@@ -31,14 +31,19 @@
     \neg P &\coloneqq P \nor P \\
     P \wedge Q &\coloneqq \neg P \nor \neg Q \\
     P \vee Q &\coloneqq \neg (P \nor Q) \\
-    P \Rightarrow Q &\coloneqq \neg P \vee Q
+    P \Rightarrow Q &\coloneqq \neg P \vee Q \\
+    P \Leftrightarrow Q &\coloneqq (P \Rightarrow Q) \wedge (Q \Rightarrow P) \\
+    \exists a: P &\coloneqq \neg(\forall a: \neg P)
 \end{align*}
 
 \subsubsection{Quantifier notation}
 \begin{align*}
     \forall a \in b: P &\coloneqq \forall a: (a \in b \Rightarrow P) \\
     \forall a, b \in c: P &\coloneqq \forall a \in c: \forall b \in c: P \\
-    \forall a \in b; c \in d: P &\coloneqq \forall a \in b: \forall c \in d: P
+    \forall a \in b; c \in d: P &\coloneqq \forall a \in b: \forall c \in d: P \\
+    \exists a \in b: P &\coloneqq \exists a: (a \in b \wedge P) \\
+    \exists a, b \in c: P &\coloneqq \exists a \in c: \exists b \in c: P \\
+    \exists a \in b; c \in d: P &\coloneqq \exists a \in b: \exists c \in d: P
 \end{align*}
 
 \commentary{
