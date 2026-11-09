@@ -4,18 +4,23 @@
 \subsection{Contradiction}
 \[\inferrule{[P] \cdots \bot \\ [Q] \cdots \bot}{P \nor Q} \quad ({\nor}I)\]
 \[\inferrule{P \nor Q \\ P}{\bot} \quad \inferrule{P \nor Q \\ Q}{\bot} \quad ({\nor}E)\]
-\[\inferrule{\bot}{P} \quad ({\bot}E)\]
+%\[\inferrule{\bot}{P} \quad ({\bot}E)\]
 \[\inferrule{[P \nor P] \cdots \bot}{P} \quad (RAA)\]
+
+\subsection{Negation}
+\[\inferrule{[P] \cdots \bot}{P \nor P} \coloneqq \inferrule{[P] \cdots \bot}{\neg P} \quad ({\nor}I)\]
+\[\inferrule{P \nor P \\ P}{\bot} \coloneqq \inferrule{\neg P \\ P}{\bot} \quad ({\nor}E)\]
+\[\inferrule{[P \nor P] \cdots \bot}{P} \coloneqq \inferrule{[\neg P] \cdots \bot}{P} \quad (RAA)\]
 
 \subsection{Conjunction}
 \begin{align*}
     &P & (\text{prem}) \\
     &Q & (\text{prem}) \\
-    &\quad [P \nor P] & (\text{assm}) \\
+    &\quad [\neg P] & (\text{assm}) \\
     &\quad \bot & ({\nor}E) \\
-    &\quad [Q \nor Q] & (\text{assm}) \\
+    &\quad [\neg Q] & (\text{assm}) \\
     &\quad \bot & ({\nor}E) \\
-    &(P \nor P) \nor (Q \nor Q) & ({\nor}I) \\
+    &\neg P \nor \neg Q & ({\nor}I) \\
     &P \wedge Q &  (\text{def})
 \end{align*}
 
@@ -23,16 +28,16 @@
 
 \begin{align*}
     &P \wedge Q & (\text{prem}) \\
-    &(P \nor P) \nor (Q \nor Q) & (\text{def}) \\
-    &\quad [P \nor P] & (\text{assm}) \\
+    &\neg P \nor \neg Q & (\text{def}) \\
+    &\quad [\neg P] & (\text{assm}) \\
     &\quad \bot & ({\nor}E) \\
     &P & (RAA)
 \end{align*}
 
 \begin{align*}
     &P \wedge Q & (\text{prem}) \\
-    &(P \nor P) \nor (Q \nor Q) & (\text{def}) \\
-    &\quad [Q \nor Q] & (\text{assm}) \\
+    &\neg P \nor \neg Q & (\text{def}) \\
+    &\quad [\neg Q] & (\text{assm}) \\
     &\quad \bot & ({\nor}E) \\
     &Q & (RAA)
 \end{align*}
@@ -44,19 +49,32 @@
 \begin{align*}
     &P & (\text{prem}) \\
     &P \Rightarrow Q & (\text{prem}) \\
-    &((P \nor P) \nor Q) \nor ((P \nor P) \nor Q) & (\text{def}) \\
-    &\quad [Q \nor Q] & (\text{assm}) \\
-    &\quad\quad [P \nor P] & (\text{assm}) \\
+    &\neg(\neg P \nor Q) & (\text{def}) \\
+    &\quad [\neg Q] & (\text{assm}) \\
+    &\quad\quad [\neg P] & (\text{assm}) \\
     &\quad\quad \bot & ({\nor}E) \\
     &\quad\quad [Q] & (\text{assm}) \\
     &\quad\quad \bot & ({\nor}E) \\
-    &\quad (P \nor P) \nor Q & ({\nor}I) \\
+    &\quad \neg P \nor Q & ({\nor}I) \\
     &\quad \bot & ({\nor}E) \\
     &Q &(\text{RAA})
 \end{align*}
 
 \[\inferrule{P \\ P \Rightarrow Q}{Q} \quad ({\Rightarrow}E)\]
 
+\begin{align*}
+    &[P] \cdots Q & (\text{prem}) \\
+    &\quad [\neg P \nor Q] & (\text{assm}) \\
+    &\quad\quad [P] & (\text{assm}) \\
+    &\quad\quad Q & (\text{given}) \\
+    &\quad\quad \bot & ({\nor}E) \\
+    &\quad \neg P & ({\nor}I) \\
+    &\quad \bot & ({\nor}E) \\
+    &\neg(\neg P \nor Q) & ({\nor}I) \\
+    &P \Rightarrow Q & (\text{def})
+\end{align*}
+
+\[\inferrule{[P] \cdots Q}{P \Rightarrow Q}\]
 
 % EVERYTHING BELOW THIS LINE IS LIKELY TO VANISH AT SOME POINT - CONSUMED OR DERIVED FROM THE NOR STUFFS ABOVE.
 
@@ -68,8 +86,6 @@
     Q \\
     Q \wedge P
 \end{align*}
-
-\[\inferrule{[P] \\\\ \vdots \\\\ Q}{P \Rightarrow Q}\]
 
 \[(P \wedge Q) \Rightarrow (Q \wedge P)\]
 
