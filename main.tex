@@ -1,7 +1,8 @@
 \documentclass{article}
 \usepackage{mathtools}
 \usepackage{xcolor}
-\usepackage{mathpartir} % https://mirror.ox.ac.uk/sites/ctan.org/macros/latex/contrib/mathpartir/mathpartir.pdf
+\usepackage{amssymb} % I thought mathtools included amssymb... meh
+\usepackage{mathpartir} % This will most likely get replaced by a custom \frac defintion at some point. Ref: https://mirror.ox.ac.uk/sites/ctan.org/macros/latex/contrib/mathpartir/mathpartir.pdf
 
 \input{preamble}
 
@@ -14,5 +15,9 @@
 
 \input{sections/language}
 \input{sections/inference}
+\input{sections/equality}
+\input{sections/axioms}
+\input{sections/sets}
+\input{sections/naturals}
 
 \end{document}

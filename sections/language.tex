@@ -10,6 +10,7 @@
 \[
     \in,\quad \forall,\quad \nor
 \]
+% ...and of course some method of creating infinite variable placeholders: o, o', o'', o''' etc.
 
 \subsection{Formation rules}
 \begin{align*}
@@ -17,6 +18,7 @@
     &{\forall}aP \\
     &{\nor}PQ
 \end{align*}
+% Implicit use of lower case for variables and upper case for formulae.
 
 \subsection{Notational conventions}
 \subsubsection{Infix notation}
@@ -25,6 +27,7 @@
     \forall a: P &\coloneqq {\forall}aP \\
     P \nor Q &\coloneqq {\nor}PQ
 \end{align*}
+% This means much of the punctuation used is intuitive, but we can still burn down to minimal alphabet.
 
 \subsubsection{Logical connectives}
 \begin{align*}
@@ -32,19 +35,21 @@
     P \wedge Q &\coloneqq \neg P \nor \neg Q \\
     P \vee Q &\coloneqq \neg (P \nor Q) \\
     P \Rightarrow Q &\coloneqq \neg P \vee Q \\
-    P \Leftrightarrow Q &\coloneqq (P \Rightarrow Q) \wedge (Q \Rightarrow P) \\
-    \exists a: P &\coloneqq \neg(\forall a: \neg P)
+    P \Leftrightarrow Q &\coloneqq (P \Rightarrow Q) \wedge (Q \Rightarrow P)
 \end{align*}
+% Same goes for parentheses: these are used intuitively and never explicity defined or listed.
 
 \subsubsection{Quantifier notation}
 \begin{align*}
     \forall a \in b: P &\coloneqq \forall a: (a \in b \Rightarrow P) \\
     \forall a, b \in c: P &\coloneqq \forall a \in c: \forall b \in c: P \\
     \forall a \in b; c \in d: P &\coloneqq \forall a \in b: \forall c \in d: P \\
+    \exists a: P &\coloneqq \neg(\forall a: \neg P) \\ % This should be the earliest point that we define existence.
     \exists a \in b: P &\coloneqq \exists a: (a \in b \wedge P) \\
     \exists a, b \in c: P &\coloneqq \exists a \in c: \exists b \in c: P \\
     \exists a \in b; c \in d: P &\coloneqq \exists a \in b: \exists c \in d: P
 \end{align*}
+% All of this again to introduce punctuation intuitively.
 
 \commentary{
     \textbf{Metasyntactic conventions.} Variables, formulas, grouping, substitution, and related syntactic operations are understood in their conventional mathematical sense. Their explicit formalisation is deferred.
