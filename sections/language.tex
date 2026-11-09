@@ -1,5 +1,10 @@
 \section{Language}
 \label{sec:language}
+\commentary{
+    \emph{Universe} is an attempt to construct a mathematical description of reality from the smallest possible foundations.
+    
+    We begin with a formal language: a collection of symbols and rules from which more complicated mathematical statements can be constructed. At this stage, the symbols have no assumed mathematical interpretation.
+    }
 
 \subsection{Primitive symbols}
 \[
@@ -23,10 +28,10 @@
 
 \subsubsection{Logical connectives}
 \begin{align*}
-    \neg a &\coloneqq a \nor a \\
-    a \wedge b &\coloneqq \neg a \nor \neg b \\
-    a \vee b &\coloneqq \neg (a \nor b) \\
-    a \Rightarrow b &\coloneqq \neg a \vee b
+    \neg P &\coloneqq P \nor P \\
+    P \wedge Q &\coloneqq \neg P \nor \neg Q \\
+    P \vee Q &\coloneqq \neg (P \nor Q) \\
+    P \Rightarrow Q &\coloneqq \neg P \vee Q
 \end{align*}
 
 \subsubsection{Quantifier notation}
@@ -35,3 +40,11 @@
     \forall a, b \in c: P &\coloneqq \forall a \in c: \forall b \in c: P \\
     \forall a \in b; c \in d: P &\coloneqq \forall a \in b: \forall c \in d: P
 \end{align*}
+
+\commentary{
+    \textbf{Metasyntactic conventions.} Variables, formulas, grouping, substitution, and related syntactic operations are understood in their conventional mathematical sense. Their explicit formalisation is deferred.
+}
+
+\commentary{
+    These definitions establish the syntax and notational conventions used throughout \emph{Universe}. They do not yet establish which statements are true; that requires axioms and rules of inference.
+}
