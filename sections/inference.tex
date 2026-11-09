@@ -9,37 +9,58 @@
 
 \subsection{Conjunction}
 \begin{align*}
-    P &\quad (\text{prem}) \\
-    Q &\quad (\text{prem}) \\
-    [P \nor P] &\quad (\text{assm}) \\
-    \bot &\quad ({\nor}E) \\
-    [Q \nor Q] &\quad (\text{assm}) \\
-    \bot &\quad ({\nor}E) \\
-    (P \nor P) \nor (Q \nor Q) &\quad ({\nor}I)
+    &P & (\text{prem}) \\
+    &Q & (\text{prem}) \\
+    &\quad [P \nor P] & (\text{assm}) \\
+    &\quad \bot & ({\nor}E) \\
+    &\quad [Q \nor Q] & (\text{assm}) \\
+    &\quad \bot & ({\nor}E) \\
+    &(P \nor P) \nor (Q \nor Q) & ({\nor}I) \\
+    &P \wedge Q &  (\text{def})
 \end{align*}
 
 \[\inferrule{P \\ Q}{P \wedge Q} \quad ({\wedge}I)\]
 
 \begin{align*}
-    P \wedge Q &\quad (\text{prem})\\
-    (P \nor P) \nor (Q \nor Q) &\quad (\text{def})\\
-    [P \nor P] &\quad (\text{assm})\\
-    \bot &\quad ({\nor}E)\\
-    P &\quad (RAA)
+    &P \wedge Q & (\text{prem}) \\
+    &(P \nor P) \nor (Q \nor Q) & (\text{def}) \\
+    &\quad [P \nor P] & (\text{assm}) \\
+    &\quad \bot & ({\nor}E) \\
+    &P & (RAA)
 \end{align*}
 
 \begin{align*}
-    P \wedge Q &\quad (\text{prem})\\
-    (P \nor P) \nor (Q \nor Q) &\quad (\text{def})\\
-    [Q \nor Q] &\quad (\text{assm})\\
-    \bot &\quad ({\nor}E)\\
-    Q &\quad (RAA)
+    &P \wedge Q & (\text{prem}) \\
+    &(P \nor P) \nor (Q \nor Q) & (\text{def}) \\
+    &\quad [Q \nor Q] & (\text{assm}) \\
+    &\quad \bot & ({\nor}E) \\
+    &Q & (RAA)
 \end{align*}
 
 % Therefore, wizardry?
 \[\inferrule{P \wedge Q}{P} \quad \inferrule{P \wedge Q}{Q} \quad ({\wedge}E)\]
 
+\subsection{Implication}
+\begin{align*}
+    &P & (\text{prem}) \\
+    &P \Rightarrow Q & (\text{prem}) \\
+    &((P \nor P) \nor Q) \nor ((P \nor P) \nor Q) & (\text{def}) \\
+    &\quad [Q \nor Q] & (\text{assm}) \\
+    &\quad\quad [P \nor P] & (\text{assm}) \\
+    &\quad\quad \bot & ({\nor}E) \\
+    &\quad\quad [Q] & (\text{assm}) \\
+    &\quad\quad \bot & ({\nor}E) \\
+    &\quad (P \nor P) \nor Q & ({\nor}I) \\
+    &\quad \bot & ({\nor}E) \\
+    &Q &(\text{RAA})
+\end{align*}
+
+\[\inferrule{P \\ P \Rightarrow Q}{Q} \quad ({\Rightarrow}E)\]
+
+
 % EVERYTHING BELOW THIS LINE IS LIKELY TO VANISH AT SOME POINT - CONSUMED OR DERIVED FROM THE NOR STUFFS ABOVE.
+
+\section{guff}
 
 \begin{align*}
     [P \wedge Q] \\
@@ -48,8 +69,6 @@
     Q \wedge P
 \end{align*}
 
-\subsection{Implication}
-\[\inferrule{P \\ P \Rightarrow Q}{Q} \quad ({\Rightarrow}E)\]
 \[\inferrule{[P] \\\\ \vdots \\\\ Q}{P \Rightarrow Q}\]
 
 \[(P \wedge Q) \Rightarrow (Q \wedge P)\]
