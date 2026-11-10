@@ -1,6 +1,10 @@
 \section{Inference}
 \label{sec:inference}
 
+\commentary{
+    The following rules establish classical inference from NOR. Bracketed premises denote assumptions discharged by the corresponding inference.
+}
+
 \subsection{Contradiction}
 \[\inferrule{[P] \cdots \bot \\ [Q] \cdots \bot}{P \nor Q} \quad ({\nor}I)\]
 \[\inferrule{P \nor Q \\ P}{\bot} \quad \inferrule{P \nor Q \\ Q}{\bot} \quad ({\nor}E)\]
@@ -12,7 +16,12 @@
 \[\inferrule{P \nor P \\ P}{\bot} \coloneqq \inferrule{\neg P \\ P}{\bot} \quad ({\nor}E)\]
 \[\inferrule{[P \nor P] \cdots \bot}{P} \coloneqq \inferrule{[\neg P] \cdots \bot}{P} \quad (RAA)\]
 
+\commentary{
+    The following rules are derived from NOR and subsequently adopted as notational conveniences.
+}
+
 \subsection{Conjunction}
+
 \begin{align*}
     \premise{P}\\
     \premise{Q}\\
@@ -23,7 +32,6 @@
     \byrule{\neg P \nor \neg Q}{{\nor}I}\\
     \bydefinition{P \wedge Q}
 \end{align*}
-
 \[\inferrule{P \\ Q}{P \wedge Q} \quad ({\wedge}I)\]
 
 \begin{align*}
@@ -33,7 +41,6 @@
     \byrule[1]{\bot}{{\nor}E}\\
     \byrule{P}{RAA}
 \end{align*}
-
 \begin{align*}
     \premise{P \wedge Q}\\
     \bydefinition{\neg P \nor \neg Q}\\
@@ -41,11 +48,11 @@
     \byrule[1]{\bot}{{\nor}E}\\
     \byrule{Q}{RAA}
 \end{align*}
-
 % Therefore, wizardry?
 \[\inferrule{P \wedge Q}{P} \quad \inferrule{P \wedge Q}{Q} \quad ({\wedge}E)\]
 
 \subsection{Implication}
+
 \begin{align*}
     \premise{P}\\
     \premise{P \Rightarrow Q}\\
@@ -59,7 +66,6 @@
     \byrule[1]{\bot}{{\nor}E}\\
     \byrule{Q}{RAA}
 \end{align*}
-
 \[\inferrule{P \\ P \Rightarrow Q}{Q} \quad ({\Rightarrow}E)\]
 
 \begin{align*}
@@ -71,22 +77,24 @@
     \byrule[1]{\neg P}{{\nor}I}\\
     \byrule[1]{\bot}{{\nor}E}\\
     \byrule{\neg(\neg P \nor Q)}{{\nor}I}\\
+    \bydefinition{\neg P \vee Q}\\
     \bydefinition{P \Rightarrow Q}
 \end{align*}
-
 \[\inferrule{[P] \cdots Q}{P \Rightarrow Q}\]
 
-\subsection{Classics}
+\subsection{Classical Consequences}
+
 \begin{align*}
     \premise{\neg\neg P}\\
-    \bydefinition{\neg(P \nor P)}\\
     \assumption[1]{\neg P}\\
-    \bydefinition[1]{P \nor P}\\
-    \byrule{\bot}{{\nor}E}\\
+    \byrule[1]{\bot}{{\nor}E}\\
     \byrule{P}{RAA}
 \end{align*}
-
 \[\inferrule{\neg\neg P}{P} \quad ({\neg}{\neg} E)\]
+
+\commentary{
+    Substitution is capture-avoiding. Universal introduction requires the generalized variable to be absent from all undischarged assumptions. Existential elimination requires a fresh witness, absent from the conclusion and all other undischarged assumptions.
+}
 
 \subsection{Quantifiers}
 
