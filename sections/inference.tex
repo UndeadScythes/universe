@@ -14,32 +14,32 @@
 
 \subsection{Conjunction}
 \begin{align*}
-    &P & (\text{prem}) \\
-    &Q & (\text{prem}) \\
-    &\quad [\neg P] & (\text{assm}) \\
-    &\quad \bot & ({\nor}E) \\
-    &\quad [\neg Q] & (\text{assm}) \\
-    &\quad \bot & ({\nor}E) \\
-    &\neg P \nor \neg Q & ({\nor}I) \\
-    &P \wedge Q &  (\text{def})
+    \premise{P}\\
+    \premise{Q}\\
+    \assumption[1]{\neg P}\\
+    \byrule[1]{\bot}{{\nor}E} \\
+    \assumption[1]{\neg Q}\\
+    \byrule[1]{\bot}{{\nor}E}\\
+    \byrule{\neg P \nor \neg Q}{{\nor}I}\\
+    \bydefinition{P \wedge Q}
 \end{align*}
 
 \[\inferrule{P \\ Q}{P \wedge Q} \quad ({\wedge}I)\]
 
 \begin{align*}
-    &P \wedge Q & (\text{prem}) \\
-    &\neg P \nor \neg Q & (\text{def}) \\
-    &\quad [\neg P] & (\text{assm}) \\
-    &\quad \bot & ({\nor}E) \\
-    &P & (RAA)
+    \premise{P \wedge Q}\\
+    \bydefinition{\neg P \nor \neg Q}\\
+    \assumption[1]{\neg P}\\
+    \byrule[1]{\bot}{{\nor}E}\\
+    \byrule{P}{RAA}
 \end{align*}
 
 \begin{align*}
-    &P \wedge Q & (\text{prem}) \\
-    &\neg P \nor \neg Q & (\text{def}) \\
-    &\quad [\neg Q] & (\text{assm}) \\
-    &\quad \bot & ({\nor}E) \\
-    &Q & (RAA)
+    \premise{P \wedge Q}\\
+    \bydefinition{\neg P \nor \neg Q}\\
+    \assumption[1]{\neg Q}\\
+    \byrule[1]{\bot}{{\nor}E}\\
+    \byrule{Q}{RAA}
 \end{align*}
 
 % Therefore, wizardry?
@@ -47,55 +47,56 @@
 
 \subsection{Implication}
 \begin{align*}
-    &P & (\text{prem}) \\
-    &P \Rightarrow Q & (\text{prem}) \\
-    &\neg(\neg P \nor Q) & (\text{def}) \\
-    &\quad [\neg Q] & (\text{assm}) \\
-    &\quad\quad [\neg P] & (\text{assm}) \\
-    &\quad\quad \bot & ({\nor}E) \\
-    &\quad\quad [Q] & (\text{assm}) \\
-    &\quad\quad \bot & ({\nor}E) \\
-    &\quad \neg P \nor Q & ({\nor}I) \\
-    &\quad \bot & ({\nor}E) \\
-    &Q &(\text{RAA})
+    \premise{P}\\
+    \premise{P \Rightarrow Q}\\
+    \bydefinition{\neg(\neg P \nor Q)}\\
+    \assumption[1]{\neg Q}\\
+    \assumption[2]{\neg P}\\
+    \byrule[2]{\bot}{{\nor}E}\\
+    \assumption[2]{Q}\\
+    \byrule[2]{\bot}{{\nor}E}\\
+    \byrule[1]{\neg P \nor Q}{{\nor}I}\\
+    \byrule[1]{\bot}{{\nor}E}\\
+    \byrule{Q}{RAA}
 \end{align*}
 
 \[\inferrule{P \\ P \Rightarrow Q}{Q} \quad ({\Rightarrow}E)\]
 
 \begin{align*}
-    &[P] \cdots Q & (\text{prem}) \\
-    &\quad [\neg P \nor Q] & (\text{assm}) \\
-    &\quad\quad [P] & (\text{assm}) \\
-    &\quad\quad Q & (\text{given}) \\
-    &\quad\quad \bot & ({\nor}E) \\
-    &\quad \neg P & ({\nor}I) \\
-    &\quad \bot & ({\nor}E) \\
-    &\neg(\neg P \nor Q) & ({\nor}I) \\
-    &P \Rightarrow Q & (\text{def})
+    \premise{[P] \cdots Q}\\
+    \assumption[1]{\neg P \nor Q}\\
+    \assumption[2]{P}\\
+    \byrule[2]{Q}{\text{given}}\\
+    \byrule[2]{\bot}{{\nor}E}\\
+    \byrule[1]{\neg P}{{\nor}I}\\
+    \byrule[1]{\bot}{{\nor}E}\\
+    \byrule{\neg(\neg P \nor Q)}{{\nor}I}\\
+    \bydefinition{P \Rightarrow Q}
 \end{align*}
 
 \[\inferrule{[P] \cdots Q}{P \Rightarrow Q}\]
 
-% EVERYTHING BELOW THIS LINE IS LIKELY TO VANISH AT SOME POINT - CONSUMED OR DERIVED FROM THE NOR STUFFS ABOVE.
-
-\section{guff}
-
+\subsection{Classics}
 \begin{align*}
-    [P \wedge Q] \\
-    P \\
-    Q \\
-    Q \wedge P
+    \premise{\neg\neg P}\\
+    \bydefinition{\neg(P \nor P)}\\
+    \assumption[1]{\neg P}\\
+    \bydefinition[1]{P \nor P}\\
+    \byrule{\bot}{{\nor}E}\\
+    \byrule{P}{RAA}
 \end{align*}
 
-\[(P \wedge Q) \Rightarrow (Q \wedge P)\]
-
-\subsection{Classics}
 \[\inferrule{\neg\neg P}{P} \quad ({\neg}{\neg} E)\]
 
 \subsection{Quantifiers}
-% Seriously thinking of adopting a quick def for \langle x \rangle - rustlers joy.
-\[\inferrule{\forall a: P\langle a \rangle}{P\langle b \rangle} \quad ({\forall}E)\]
-\[\inferrule{P\langle a \rangle}{\forall a: P\langle a \rangle} \quad ({\forall}I)\]
-\[\inferrule{P\langle a \rangle}{\exists b: P\langle b \rangle} \quad ({\exists}I)\]
-\[\inferrule{\exists a: P\langle a \rangle \\ [P\langle b \rangle] \cdots Q}{Q} \quad ({\exists}E)\]
+
+% Seriously thinking of adopting a quick def for \langle x \rangle - rustlers joy. DONE!
+\[\inferrule{\forall a: P\bound{a}}{P\bound{b}} \quad ({\forall}E)\]
+\[\inferrule{P\bound{a}}{\forall a: P\bound{a}} \quad ({\forall}I)\]
+\[\inferrule{P\bound{a}}{\exists b: P\bound{b}} \quad ({\exists}I)\]
+\[\inferrule{\exists a: P\bound{a} \\ [P\bound{b}] \cdots Q}{Q} \quad ({\exists}E)\]
 % Any notion of bound and free variables above is implicit - no further explanation of these concepts is provided.
+
+% EVERYTHING BELOW THIS LINE IS LIKELY TO VANISH AT SOME POINT - CONSUMED OR DERIVED FROM THE NOR STUFFS ABOVE.
+
+% And so it was done.

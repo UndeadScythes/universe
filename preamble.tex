@@ -5,3 +5,10 @@
 }
 
 \newcommand{\nor}{\downarrow}
+
+% INFERENCE
+\newcommand{\premise}[2][0]{& \hspace{#1em} #2 & \quad (\text{prem})}
+\newcommand{\assumption}[2][0]{& \hspace{#1em} [#2] & \quad (\text{assm})}
+\newcommand{\bydefinition}[2][0]{& \hspace{#1em} #2 & \quad (\text{def})}
+\newcommand{\byrule}[3][0]{& \hspace{#1em} #2 & \quad (#3)}
+\newcommand{\bound}[1]{\langle #1 \rangle}
