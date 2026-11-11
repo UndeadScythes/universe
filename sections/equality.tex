@@ -6,7 +6,7 @@
 \subsection{Definition}
 \[a = b \coloneqq \forall c: ((c \in a \Leftrightarrow c \in b) \wedge (a \in c \Leftrightarrow b \in c))\]
 
-\subsubsection{Reflexivity}
+\subsection{Properties}
 \begin{align*}
     \assumption[1]{d \in a}\\
     \byrule{d \in a \Leftrightarrow d \in a}{{\Leftrightarrow}I}\\
@@ -19,3 +19,4 @@
     \bydefinition{a = a}\\
     \byrule{\forall a: a = a}{{\forall}I}
 \end{align*}
+\[\vdash \forall a: a = a \quad (\text{reflexivity})\]
