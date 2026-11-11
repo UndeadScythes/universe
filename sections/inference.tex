@@ -22,6 +22,7 @@
 
 \subsection{Conjunction}
 
+% P, Q -> P and Q
 \begin{align*}
     \premise{P}\\
     \premise{Q}\\
@@ -34,6 +35,7 @@
 \end{align*}
 \[\inferrule{P \\ Q}{P \wedge Q} \quad ({\wedge}I)\]
 
+% P and Q -> P, Q
 \begin{align*}
     \premise{P \wedge Q}\\
     \bydefinition{\neg P \nor \neg Q}\\
@@ -53,6 +55,7 @@
 
 \subsection{Implication}
 
+% P, P=>Q > Q
 \begin{align*}
     \premise{P}\\
     \premise{P \Rightarrow Q}\\
@@ -68,6 +71,7 @@
 \end{align*}
 \[\inferrule{P \\ P \Rightarrow Q}{Q} \quad ({\Rightarrow}E)\]
 
+% [P]...Q > P=>Q
 \begin{align*}
     \premise{[P] \cdots Q}\\
     \assumption[1]{\neg P \nor Q}\\
@@ -84,6 +88,7 @@
 
 \subsection{Classical Consequences}
 
+% !!P > P
 \begin{align*}
     \premise{\neg\neg P}\\
     \assumption[1]{\neg P}\\
@@ -109,6 +114,7 @@
 
 % And so it was done.
 
+% [P] > P => P
 \subsection{Tricks}
 \begin{align*}
     \assumption[1]{P}\\
@@ -116,6 +122,7 @@
 \end{align*}
 \[\inferrule{[P]}{P \Rightarrow P} \quad ({\Rightarrow}I)\]
 
+% P=>Q, Q=>P > P<=>Q
 \begin{align*}
     \premise{P \Rightarrow Q}\\
     \premise{Q \Rightarrow P}\\
@@ -124,6 +131,7 @@
 \end{align*}
 \[\inferrule{P \Rightarrow Q \\ Q \Rightarrow P}{P \Leftrightarrow Q} \quad ({\Leftrightarrow}I)\]
 
+% [P] > P<=>P
 \begin{align*}
     \assumption[1]{P}\\
     \byrule{P \Rightarrow P}{{\Rightarrow}I}\\
@@ -131,30 +139,44 @@
 \end{align*}
 \[\inferrule{[P]}{P \Leftrightarrow P} \quad ({\Leftrightarrow}I)\]
 
+% P<=>Q > P=>Q, Q=>P
+\begin{align*}
+    \premise{P \Leftrightarrow Q}\\
+    \bydefinition{(P \Rightarrow Q) \wedge (Q \Rightarrow P)}\\
+    \byrule{P \Rightarrow Q}{{\wedge}E}
+\end{align*}
+\begin{align*}
+    \premise{P \Leftrightarrow Q}\\
+    \bydefinition{(P \Rightarrow Q) \wedge (Q \Rightarrow P)}\\
+    \byrule{Q \Rightarrow P}{{\wedge}E}
+\end{align*}
+\[\inferrule{P \Leftrightarrow Q}{P \Rightarrow Q} \quad \inferrule{P \Leftrightarrow Q}{Q \Rightarrow P} \quad ({\Leftrightarrow}E)\]
+
+% P/Q, P<=>Q > Q/P
 \begin{align*}
     \premise{P}\\
     \premise{P \Leftrightarrow Q}\\
-    \bydefinition{(P \Rightarrow Q) \wedge (Q \Rightarrow P)}\\
-    \byrule{P \Rightarrow Q}{{\wedge}E}\\
+    \byrule{P \Rightarrow Q}{{\Leftrightarrow}E}\\
     \byrule{Q}{{\Rightarrow}E}\\
 \end{align*}
 \begin{align*}
     \premise{Q}\\
     \premise{P \Leftrightarrow Q}\\
-    \bydefinition{(P \Rightarrow Q) \wedge (Q \Rightarrow P)}\\
-    \byrule{Q \Rightarrow P}{{\wedge}E}\\
+    \byrule{Q \Rightarrow P}{{\Leftrightarrow}E}\\
     \byrule{P}{{\Rightarrow}E}\\
 \end{align*}
 \[\inferrule{P \\ P \Leftrightarrow Q}{Q} \quad \inferrule{Q \\ P \Leftrightarrow Q}{P} \quad ({\Leftrightarrow}E)\]
 
+% P<=>Q > Q<=>P
 \begin{align*}
     \premise{P \Leftrightarrow Q}\\
-    \byrule{P}{{\Leftrightarrow}E}\\
-    \byrule{Q}{{\Leftrightarrow}E}\\
+    \byrule{P \Rightarrow Q}{{\Leftrightarrow}E}\\
+    \byrule{Q \Rightarrow P}{{\Leftrightarrow}E}\\
     \byrule{Q \Leftrightarrow P}{{\Leftrightarrow}I}
 \end{align*}
 \[\inferrule{P \Leftrightarrow Q}{Q \Leftrightarrow P} \quad ({\Leftrightarrow}S)\]
 
+% P<=>Q, Q<=>R > P<=>R
 \begin{align*}
     \premise{P \Leftrightarrow Q}\\
     \premise{Q \Leftrightarrow R}\\
