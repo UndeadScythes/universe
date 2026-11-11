@@ -20,3 +20,41 @@
     \byrule{\forall a: a = a}{{\forall}I}
 \end{align*}
 \[\vdash \forall a: a = a \quad (\text{reflexivity})\]
+
+\begin{align*}
+    \assumption[1]{a = b}\\
+    \bydefinition[1]{\forall c: ((c \in a \Leftrightarrow c \in b) \wedge (a \in c \Leftrightarrow b \in c))}\\
+    \byrule[1]{(d \in a \Leftrightarrow d \in b) \wedge (a \in d \Leftrightarrow b \in d)}{{\forall}E}\\
+    \byrule[1]{d \in a \Leftrightarrow d \in b}{{\wedge}E}\\
+    \byrule[1]{d \in b \Leftrightarrow d \in a}{{\Leftrightarrow}S}\\
+    \byrule[1]{a \in d \Leftrightarrow b \in d}{{\wedge}E}\\
+    \byrule[1]{b \in d \Leftrightarrow a \in d}{{\Leftrightarrow}S}\\
+    \byrule[1]{(d \in b \Leftrightarrow d \in a) \wedge (b \in d \Leftrightarrow a \in d)}{{\wedge}I}\\
+    \byrule[1]{\forall d: ((d \in b \Leftrightarrow d \in a) \wedge (b \in d \Leftrightarrow a \in d))}{{\forall}I}\\
+    \bydefinition[1]{b = a}\\
+    \byrule{a = b \Rightarrow b = a}{{\Rightarrow}I}\\
+    \byrule{\forall a, b: (a = b \Rightarrow b = a)}{{\forall}I}\\
+\end{align*}
+\[\vdash \forall a, b: (a = b \Rightarrow b = a) \quad (\text{symmetry})\]
+
+\begin{align*}
+    \assumption[1]{a = b \wedge b = c}\\
+    \byrule[1]{a = b}{{\wedge}E}\\
+    \bydefinition[1]{\forall d: ((d \in a \Leftrightarrow d \in b) \wedge (a \in d \Leftrightarrow b \in d))}\\
+    \byrule[1]{(f \in a \Leftrightarrow f \in b) \wedge (a \in f \Leftrightarrow b \in f)}{{\forall}E}\\
+    \byrule[1]{f \in a \Leftrightarrow f \in b}{{\wedge}E}\\
+    \byrule[1]{a \in f \Leftrightarrow b \in f}{{\wedge}E}\\
+    \byrule[1]{b = c}{{\wedge}E}\\
+    \bydefinition[1]{\forall e: ((e \in b \Leftrightarrow e \in c) \wedge (b \in e \Leftrightarrow c \in e))}\\
+    \byrule[1]{(f \in b \Leftrightarrow f \in c) \wedge (b \in f \Leftrightarrow c \in f)}{{\forall}E}\\
+    \byrule[1]{f \in b \Leftrightarrow f \in c}{{\wedge}E}\\
+    \byrule[1]{b \in f \Leftrightarrow c \in f}{{\wedge}E}\\
+    \byrule[1]{f \in a \Leftrightarrow f \in c}{{\Leftrightarrow}T}\\
+    \byrule[1]{a \in f \Leftrightarrow c \in f}{{\Leftrightarrow}T}\\
+    \byrule[1]{(f \in a \Leftrightarrow f \in c) \wedge (a \in f \Leftrightarrow c \in f)}{{\wedge}I}\\
+    \byrule[1]{\forall f: ((f \in a \Leftrightarrow f \in c) \wedge (a \in f \Leftrightarrow c \in f))}{{\forall}I}\\
+    \bydefinition[1]{a = c}\\
+    \byrule{(a = b \wedge b = c) \Rightarrow a = c}{{\Rightarrow}I}\\
+    \byrule{\forall a, b, c: ((a = b \wedge b = c) \Rightarrow a = c)}{{\forall}I}
+\end{align*}
+\[\vdash \forall a, b, c: ((a = b \wedge b = c) \Rightarrow a = c) \quad (\text{transitivity})\]

@@ -119,7 +119,7 @@
 \begin{align*}
     \premise{P \Rightarrow Q}\\
     \premise{Q \Rightarrow P}\\
-    \byrule{P \Rightarrow Q \wedge Q \Rightarrow P}{{\wedge}I}\\
+    \byrule{(P \Rightarrow Q) \wedge (Q \Rightarrow P)}{{\wedge}I}\\
     \bydefinition{P \Leftrightarrow Q}
 \end{align*}
 \[\inferrule{P \Rightarrow Q \\ Q \Rightarrow P}{P \Leftrightarrow Q} \quad ({\Leftrightarrow}I)\]
@@ -130,3 +130,44 @@
     \byrule{P \Leftrightarrow P}{{\Leftrightarrow}I}
 \end{align*}
 \[\inferrule{[P]}{P \Leftrightarrow P} \quad ({\Leftrightarrow}I)\]
+
+\begin{align*}
+    \premise{P}\\
+    \premise{P \Leftrightarrow Q}\\
+    \bydefinition{(P \Rightarrow Q) \wedge (Q \Rightarrow P)}\\
+    \byrule{P \Rightarrow Q}{{\wedge}E}\\
+    \byrule{Q}{{\Rightarrow}E}\\
+\end{align*}
+\begin{align*}
+    \premise{Q}\\
+    \premise{P \Leftrightarrow Q}\\
+    \bydefinition{(P \Rightarrow Q) \wedge (Q \Rightarrow P)}\\
+    \byrule{Q \Rightarrow P}{{\wedge}E}\\
+    \byrule{P}{{\Rightarrow}E}\\
+\end{align*}
+\[\inferrule{P \\ P \Leftrightarrow Q}{Q} \quad \inferrule{Q \\ P \Leftrightarrow Q}{P} \quad ({\Leftrightarrow}E)\]
+
+\begin{align*}
+    \premise{P \Leftrightarrow Q}\\
+    \byrule{P}{{\Leftrightarrow}E}\\
+    \byrule{Q}{{\Leftrightarrow}E}\\
+    \byrule{Q \Leftrightarrow P}{{\Leftrightarrow}I}
+\end{align*}
+\[\inferrule{P \Leftrightarrow Q}{Q \Leftrightarrow P} \quad ({\Leftrightarrow}S)\]
+
+\begin{align*}
+    \premise{P \Leftrightarrow Q}\\
+    \premise{Q \Leftrightarrow R}\\
+    \assumption[1]{P}\\
+    \byrule[1]{Q}{{\Leftrightarrow}E}\\
+    \byrule[1]{R}{{\Leftrightarrow}E}\\
+    \byrule{P \Rightarrow R}{{\Rightarrow}I}\\
+    \byrule{R \Leftrightarrow Q}{{\Leftrightarrow}S}\\
+    \byrule{Q \Leftrightarrow P}{{\Leftrightarrow}S}\\
+    \assumption[1]{R}\\
+    \byrule[1]{Q}{{\Leftrightarrow}E}\\
+    \byrule[1]{P}{{\Leftrightarrow}E}\\
+    \byrule{R \Rightarrow P}{{\Rightarrow}I}\\
+    \byrule{P \Leftrightarrow R}{{\Leftrightarrow}I}
+\end{align*}
+\[\inferrule{P \Leftrightarrow Q \\ Q \Leftrightarrow R}{P \Leftrightarrow R} \quad ({\Leftrightarrow}T)\]
