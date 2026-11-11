@@ -8,10 +8,8 @@
 
 \subsection{Properties}
 \begin{align*}
-    \assumption[1]{d \in a}\\
-    \byrule{d \in a \Leftrightarrow d \in a}{{\Leftrightarrow}I}\\
-    \assumption[1]{a \in d}\\
-    \byrule{a \in d \Leftrightarrow a \in d}{{\Leftrightarrow}I}\\
+    \byrule{d \in a \Leftrightarrow d \in a}{{\Leftrightarrow}R}\\
+    \byrule{a \in d \Leftrightarrow a \in d}{{\Leftrightarrow}R}\\
     \byrule{(d \in a \Leftrightarrow d \in a)
         \wedge (a \in d \Leftrightarrow a \in d)}{{\wedge}I}\\
     \byrule{\forall d: ((d \in a \Leftrightarrow d \in a)
@@ -58,3 +56,60 @@
     \byrule{\forall a, b, c: ((a = b \wedge b = c) \Rightarrow a = c)}{{\forall}I}
 \end{align*}
 \[\vdash \forall a, b, c: ((a = b \wedge b = c) \Rightarrow a = c) \quad (\text{transitivity})\]
+
+\subsection{Substitution}
+\commentary{
+    By structural induction on formulas. Within each inductive case, $({=}S)$ denotes substitution already established for the immediate subformulas.
+}
+
+\begin{align*}
+    \premise{a = b}\\
+    \premise{a \in c}\\
+    \bydefinition{\forall d: ((d \in a \Leftrightarrow d \in b) \wedge (a \in d \Leftrightarrow b \in d))}\\
+    \byrule{(c \in a \Leftrightarrow c \in b) \wedge (a \in c \Leftrightarrow b \in c)}{{\forall}E}\\
+    \byrule{a \in c \Leftrightarrow b \in c}{{\wedge}E}\\
+    \byrule{b \in c}{{\Leftrightarrow}E}
+\end{align*}
+\begin{align*}
+    \premise{a = b}\\
+    \premise{c \in a}\\
+    \bydefinition{\forall d: ((d \in a \Leftrightarrow d \in b) \wedge (a \in d \Leftrightarrow b \in d))}\\
+    \byrule{(c \in a \Leftrightarrow c \in b) \wedge (a \in c \Leftrightarrow b \in c)}{{\forall}E}\\
+    \byrule{c \in a \Leftrightarrow c \in b}{{\wedge}E}\\
+    \byrule{c \in b}{{\Leftrightarrow}E}
+\end{align*}
+\[\inferrule{a = b \\ a \in c}{b \in c} \quad \inferrule{a = b \\ c \in a}{c \in b} \quad ({=}S)\]
+
+\begin{align*}
+    \premise{a = b}\\
+    \premise{\forall c: P\bound{a}}\\
+    \assumption[1]{P\bound{a}}\\
+    \byrule[1]{P\bound{b}}{{=}S}\\
+    \byrule{P\bound{a} \Rightarrow P\bound{b}}{{\Rightarrow}I}\\
+    \assumption[1]{P\bound{b}}\\
+    \byrule[1]{P\bound{a}}{{=}S}\\
+    \byrule{P\bound{b} \Rightarrow P\bound{a}}{{\Rightarrow}I}\\
+    \byrule{P\bound{a} \Leftrightarrow P\bound{b}}{{\Leftrightarrow}I}\\
+    \byrule{\forall c: (P\bound{a} \Leftrightarrow P\bound{b})}{{\forall}I}\\
+    \byrule{(\forall c: P\bound{a}) \Leftrightarrow (\forall c: P\bound{b})}{{\forall}D}\\
+    \byrule{\forall c: P\bound{b}}{{\Leftrightarrow}E}
+\end{align*}
+\[\inferrule{a = b \\ \forall c: P\bound{a}}{\forall c: P\bound{b}} \quad ({=}S)\]
+
+\begin{align*}
+    \premise{a = b}\\
+    \premise{P\bound{a} \nor Q}\\
+    \assumption[1]{P\bound{a}}\\
+    \byrule[1]{P\bound{b}}{{=}S}\\
+    \byrule{P\bound{a} \Rightarrow P\bound{b}}{{\Rightarrow}I}\\
+    \assumption[1]{P\bound{b}}\\
+    \byrule[1]{P\bound{a}}{{=}S}\\
+    \byrule{P\bound{b} \Rightarrow P\bound{a}}{{\Rightarrow}I}\\
+    \byrule{P\bound{a} \Leftrightarrow P\bound{b}}{{\Leftrightarrow}I}\\
+    \byrule{Q \Leftrightarrow Q}{{\Leftrightarrow}R}\\
+    \byrule{(P\bound{a} \nor Q) \Leftrightarrow (P\bound{b} \nor Q)}{{\nor}D}\\
+    \byrule{P\bound{b} \nor Q}{{\Leftrightarrow}E}
+\end{align*}
+\[\inferrule{a = b \\ P\bound{a} \nor Q}{P\bound{b} \nor Q} \quad ({=}S)\]
+
+\[\boxed{\inferrule{a = b \\ P\bound{a}}{P\bound{b}} \quad ({=}E)}\]

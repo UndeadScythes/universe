@@ -114,13 +114,13 @@
 
 % And so it was done.
 
-% [P] > P => P
+% > P => P
 \subsection{Tricks}
 \begin{align*}
     \assumption[1]{P}\\
     \byrule{P \Rightarrow P}{{\Rightarrow}I}    
 \end{align*}
-\[\inferrule{[P]}{P \Rightarrow P} \quad ({\Rightarrow}I)\]
+\[\vdash P \Rightarrow P \quad ({\Rightarrow}R)\]
 
 % P=>Q, Q=>P > P<=>Q
 \begin{align*}
@@ -131,13 +131,12 @@
 \end{align*}
 \[\inferrule{P \Rightarrow Q \\ Q \Rightarrow P}{P \Leftrightarrow Q} \quad ({\Leftrightarrow}I)\]
 
-% [P] > P<=>P
+% > P<=>P
 \begin{align*}
-    \assumption[1]{P}\\
-    \byrule{P \Rightarrow P}{{\Rightarrow}I}\\
+    \byrule{P \Rightarrow P}{{\Rightarrow}R}\\
     \byrule{P \Leftrightarrow P}{{\Leftrightarrow}I}
 \end{align*}
-\[\inferrule{[P]}{P \Leftrightarrow P} \quad ({\Leftrightarrow}I)\]
+\[\vdash P \Leftrightarrow P \quad ({\Leftrightarrow}R)\]
 
 % P<=>Q > P=>Q, Q=>P
 \begin{align*}
@@ -193,3 +192,48 @@
     \byrule{P \Leftrightarrow R}{{\Leftrightarrow}I}
 \end{align*}
 \[\inferrule{P \Leftrightarrow Q \\ Q \Leftrightarrow R}{P \Leftrightarrow R} \quad ({\Leftrightarrow}T)\]
+
+% P<=>Q, R<=>S > P|R<=>Q|S
+\begin{align*}
+    \premise{P \Leftrightarrow Q}\\
+    \premise{R \Leftrightarrow S}\\
+    \assumption[1]{P \nor R}\\
+    \assumption[2]{Q}\\
+    \byrule[2]{P}{{\Leftrightarrow}E}\\
+    \byrule[2]{\bot}{{\nor}E}\\
+    \assumption[2]{S}\\
+    \byrule[2]{R}{{\Leftrightarrow}E}\\
+    \byrule[2]{\bot}{{\nor}E}\\
+    \byrule[1]{Q \nor S}{{\nor}I}\\
+    \byrule{(P \nor R) \Rightarrow (Q \nor S)}{{\Rightarrow}I}\\
+    \assumption[1]{Q \nor S}\\
+    \assumption[2]{P}\\
+    \byrule[2]{Q}{{\Leftrightarrow}E}\\
+    \byrule[2]{\bot}{{\nor}E}\\
+    \assumption[2]{R}\\
+    \byrule[2]{S}{{\Leftrightarrow}E}\\
+    \byrule[2]{\bot}{{\nor}E}\\
+    \byrule[1]{P \nor R}{{\nor}I}\\
+    \byrule{(Q \nor S) \Rightarrow (P \nor R)}{{\Rightarrow}I}\\
+    \byrule{(P \nor R) \Leftrightarrow (Q \nor S)}{{\Leftrightarrow}I}
+\end{align*}
+\[\inferrule{P \Leftrightarrow Q \\ R \Leftrightarrow S}{(P \nor R) \Leftrightarrow (Q \nor S)} \quad ({\nor}D)\]
+
+% Aa:P<=>Q > Aa:P <=> Aa:Q
+\begin{align*}
+    \premise{\forall a: (P\bound{a} \Leftrightarrow Q\bound{a})}\\
+    \assumption[1]{\forall a: P\bound{a}}\\
+    \byrule[1]{P\bound{b}}{{\forall}E}\\
+    \byrule[1]{P\bound{b} \Leftrightarrow Q\bound{b}}{{\forall}E}\\
+    \byrule[1]{Q\bound{b}}{{\Leftrightarrow}E}\\
+    \byrule[1]{\forall a: Q\bound{a}}{{\forall}I}\\
+    \byrule{(\forall a: P\bound{a}) \Rightarrow (\forall a: Q\bound{a})}{{\Rightarrow}I}\\
+    \assumption[1]{\forall a: Q\bound{a}}\\
+    \byrule[1]{Q\bound{b}}{{\forall}E}\\
+    \byrule[1]{Q\bound{b} \Leftrightarrow P\bound{b}}{{\forall}E}\\
+    \byrule[1]{P\bound{b}}{{\Leftrightarrow}E}\\
+    \byrule[1]{\forall a: P\bound{a}}{{\forall}I}\\
+    \byrule{(\forall a: Q\bound{a}) \Rightarrow (\forall a: P\bound{a})}{{\Rightarrow}I}\\
+    \byrule{(\forall a: P\bound{a}) \Leftrightarrow (\forall a: Q\bound{a})}{{\Leftrightarrow}I}
+\end{align*}
+\[\inferrule{\forall a: (P\bound{a} \Leftrightarrow Q\bound{a})}{(\forall a: P\bound{a}) \Leftrightarrow (\forall a: Q\bound{a})} \quad ({\forall}D)\]
