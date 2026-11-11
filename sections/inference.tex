@@ -80,7 +80,7 @@
     \bydefinition{\neg P \vee Q}\\
     \bydefinition{P \Rightarrow Q}
 \end{align*}
-\[\inferrule{[P] \cdots Q}{P \Rightarrow Q}\]
+\[\inferrule{[P] \cdots Q}{P \Rightarrow Q} \quad ({\Rightarrow}I)\]
 
 \subsection{Classical Consequences}
 
@@ -108,3 +108,25 @@
 % EVERYTHING BELOW THIS LINE IS LIKELY TO VANISH AT SOME POINT - CONSUMED OR DERIVED FROM THE NOR STUFFS ABOVE.
 
 % And so it was done.
+
+\subsection{Tricks}
+\begin{align*}
+    \assumption[1]{P}\\
+    \byrule{P \Rightarrow P}{{\Rightarrow}I}    
+\end{align*}
+\[\inferrule{[P]}{P \Rightarrow P} \quad ({\Rightarrow}I)\]
+
+\begin{align*}
+    \premise{P \Rightarrow Q}\\
+    \premise{Q \Rightarrow P}\\
+    \byrule{P \Rightarrow Q \wedge Q \Rightarrow P}{{\wedge}I}\\
+    \bydefinition{P \Leftrightarrow Q}
+\end{align*}
+\[\inferrule{P \Rightarrow Q \\ Q \Rightarrow P}{P \Leftrightarrow Q} \quad ({\Leftrightarrow}I)\]
+
+\begin{align*}
+    \assumption[1]{P}\\
+    \byrule{P \Rightarrow P}{{\Rightarrow}I}\\
+    \byrule{P \Leftrightarrow P}{{\Leftrightarrow}I}
+\end{align*}
+\[\inferrule{[P]}{P \Leftrightarrow P} \quad ({\Leftrightarrow}I)\]

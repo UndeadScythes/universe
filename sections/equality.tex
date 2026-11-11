@@ -5,3 +5,17 @@
 
 \subsection{Definition}
 \[a = b \coloneqq \forall c: ((c \in a \Leftrightarrow c \in b) \wedge (a \in c \Leftrightarrow b \in c))\]
+
+\subsubsection{Reflexivity}
+\begin{align*}
+    \assumption[1]{d \in a}\\
+    \byrule{d \in a \Leftrightarrow d \in a}{{\Leftrightarrow}I}\\
+    \assumption[1]{a \in d}\\
+    \byrule{a \in d \Leftrightarrow a \in d}{{\Leftrightarrow}I}\\
+    \byrule{(d \in a \Leftrightarrow d \in a)
+        \wedge (a \in d \Leftrightarrow a \in d)}{{\wedge}I}\\
+    \byrule{\forall d: ((d \in a \Leftrightarrow d \in a)
+        \wedge (a \in d \Leftrightarrow a \in d))}{{\forall}I}\\
+    \bydefinition{a = a}\\
+    \byrule{\forall a: a = a}{{\forall}I}
+\end{align*}
