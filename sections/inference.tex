@@ -116,6 +116,17 @@
 \end{align*}
 \[\inferrule{[P]}{P \Rightarrow P} \quad ({\Rightarrow}I)\]
 
+% This expansion to assist review:
+\begin{align*}
+    \assumption[1]{P}\\
+    \bydefinition[1]{P}\\
+    \assumption[2]{\neg P \nor P}\\
+    \byrule[2]{\bot}{{\nor}E}\\
+    \byrule[1]{\neg(\neg P \nor P)}{{\nor}I}\\
+    \bydefinition[1]{\neg P \vee P}\\
+    \bydefinition[1]{P \Rightarrow P}
+\end{align*}
+
 \begin{align*}
     \premise{P \Rightarrow Q}\\
     \premise{Q \Rightarrow P}\\
