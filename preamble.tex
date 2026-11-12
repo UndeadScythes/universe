@@ -1,3 +1,29 @@
+\newtcolorbox{foundation}{
+    before upper={
+        \setlength{\abovedisplayskip}{0pt}
+        \setlength{\abovedisplayshortskip}{0pt}
+        \setlength{\belowdisplayskip}{0pt}
+        \setlength{\belowdisplayshortskip}{0pt}
+    },enhanced,
+    breakable,
+    colback=white,
+    colframe=black,
+    boxrule=1.5pt,
+    sharp corners
+}
+\newtcolorbox{notation}{
+    before upper={
+        \setlength{\abovedisplayskip}{0pt}
+        \setlength{\abovedisplayshortskip}{0pt}
+        \setlength{\belowdisplayskip}{0pt}
+        \setlength{\belowdisplayshortskip}{0pt}
+    },enhanced,
+    breakable,
+    colback=white,
+    sharp corners,
+    frame hidden,
+    borderline={0.6pt}{0pt}{black,dashed}
+}
 \newcommand{\commentary}[1]{%
     \par\smallskip
     {\small\color{gray}\itshape #1\par}%
@@ -11,6 +37,8 @@
 \newcommand{\assumption}[2][0]{& \hspace{#1em} [#2] & \quad (\text{assm})}
 \newcommand{\bydefinition}[2][0]{& \hspace{#1em} #2 & \quad (\text{def})}
 \newcommand{\induction}[2][0]{& \hspace{#1em} #2 & \quad (\text{induc})}
+\newcommand{\reiterate}[2][0]{& \hspace{#1em} #2 & \quad (\text{reit})}
 \newcommand{\byrule}[3][0]{& \hspace{#1em} #2 & \quad (#3)}
+\newcommand{\axiom}[3][0]{& \hspace{#1em} #2 & \quad (\mathsf{#3})}
 
 \newcommand{\bound}[1]{\langle #1 \rangle}

@@ -4,3 +4,34 @@
 \subsection{Infinity and separation}
 
 % Hopefully to include the leanest set of axioms here.
+\begin{foundation}
+    \[\mathsf{EXT} \vdash \forall a, b: ((\forall c: (c \in a \Leftrightarrow c \in b)) \Rightarrow a = b)\]
+\end{foundation}
+
+\begin{notation}
+    \[a \notin b \coloneqq \neg(a \in b)\]
+\end{notation}
+
+\begin{align*}
+    \assumption[1]{(\forall c: c \notin a) \wedge (\forall c: c \notin b)}\\
+    \byrule[1]{\forall c: c \notin a}{{\wedge}E}\\
+    \byrule[1]{d \notin a}{{\forall}E}\\
+    \assumption[2]{d \in a}\\
+    \byrule[2]{\bot}{{\nor}E}\\
+    \byrule[2]{d \in b}{{\bot}E}\\
+    \byrule[1]{d \in a \Rightarrow d \in b}{{\Rightarrow}I}\\
+    \byrule[1]{\forall c: c \notin b}{{\wedge}E}\\
+    \byrule[1]{d \notin b}{{\forall}E}\\
+    \assumption[2]{d \in b}\\
+    \byrule[2]{\bot}{{\nor}E}\\
+    \byrule[2]{d \in a}{{\bot}E}\\
+    \byrule[1]{d \in b \Rightarrow d \in a}{{\Rightarrow}I}\\
+    \byrule[1]{d \in a \Leftrightarrow d \in b}{{\Leftrightarrow}I}\\
+    \byrule[1]{\forall d: (d \in a \Leftrightarrow d \in b)}{{\forall}I}\\
+    \axiom[1]{\forall e, f: ((\forall d: (d \in e \Leftrightarrow d \in f)) \Rightarrow e = f)}{EXT}\\
+    \byrule[1]{(\forall d: (d \in a \Leftrightarrow d \in b)) \Rightarrow a = b}{{\forall}E}\\
+    \byrule[1]{a = b}{{\Rightarrow}E}\\
+    \byrule{((\forall c: c \notin a) \wedge (\forall c: c \notin b)) \Rightarrow a = b}{{\Rightarrow}I}\\
+    \byrule{\forall a, b: (((\forall c: c \notin a) \wedge (\forall c: c \notin b)) \Rightarrow a = b)}{{\forall}I}
+\end{align*}
+\[\vdash \forall a, b: (((\forall c: c \notin a) \wedge (\forall c: c \notin b)) \Rightarrow a = b)\]

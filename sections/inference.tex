@@ -6,15 +6,50 @@
 }
 
 \subsection{Contradiction}
-\[\inferrule{[P] \cdots \bot \\ [Q] \cdots \bot}{P \nor Q} \quad ({\nor}I)\]
-\[\inferrule{P \nor Q \\ P}{\bot} \quad \inferrule{P \nor Q \\ Q}{\bot} \quad ({\nor}E)\]
-%\[\inferrule{\bot}{P} \quad ({\bot}E)\]
-\[\inferrule{[P \nor P] \cdots \bot}{P} \quad (RAA)\]
+\begin{foundation}
+    \[\inferrule{P \nor Q \\ P}{\bot} \quad \inferrule{P \nor Q \\ Q}{\bot} \quad ({\nor}E)\]
+    \[\inferrule{[P] \cdots \bot \\ [Q] \cdots \bot}{P \nor Q} \quad ({\nor}I)\]
+    \[\inferrule{[P \nor P] \cdots \bot}{P} \quad (RAA)\]
+\end{foundation}
 
 \subsection{Negation}
-\[\inferrule{[P] \cdots \bot}{P \nor P} \coloneqq \inferrule{[P] \cdots \bot}{\neg P} \quad ({\nor}I)\]
-\[\inferrule{P \nor P \\ P}{\bot} \coloneqq \inferrule{\neg P \\ P}{\bot} \quad ({\nor}E)\]
-\[\inferrule{[P \nor P] \cdots \bot}{P} \coloneqq \inferrule{[\neg P] \cdots \bot}{P} \quad (RAA)\]
+\begin{notation}
+    \[\neg P \coloneqq P \nor P\]
+\end{notation}
+
+\begin{align*}
+    \premise{[P] \cdots \bot}\\
+    \reiterate{[P] \cdots \bot}\\
+    \byrule{P \nor P}{{\nor}I}\\
+    \bydefinition{\neg P}
+\end{align*}
+\[\inferrule{[P] \cdots \bot}{\neg P} \quad ({\neg}I)\]
+
+\begin{align*}
+    \premise{\neg P}\\
+    \premise{P}\\
+    \bydefinition{P \nor P}\\
+    \byrule{\bot}{{\nor}E}
+\end{align*}
+\[\inferrule{\neg P \\ P}{\bot} \quad ({\neg}E)\]
+
+\begin{align*}
+    \premise{[\neg P] \cdots \bot}\\
+    \bydefinition{[P \nor P] \cdots \bot}\\
+    \byrule{P}{RAA}
+\end{align*}
+\[\inferrule{[\neg P] \cdots \bot}{P} \quad (RAA)\]
+
+\subsection{Symmetry}
+\begin{align*}
+    \premise{P \nor Q}\\
+    \assumption[1]{Q}\\
+    \byrule[1]{\bot}{{\nor}E}\\
+    \assumption[1]{P}\\
+    \byrule[1]{\bot}{{\nor}E}\\
+    \byrule{Q \nor P}{{\nor}I}
+\end{align*}
+\[\inferrule{P \nor Q}{Q \nor P} \quad ({\nor}S)\]
 
 \commentary{
     The following rules are derived from NOR and subsequently adopted as notational conveniences.
@@ -22,14 +57,18 @@
 
 \subsection{Conjunction}
 
+\begin{notation}
+    \[P \wedge Q \coloneqq \neg P \nor \neg Q\]
+\end{notation}
+
 % P, Q -> P and Q
 \begin{align*}
     \premise{P}\\
     \premise{Q}\\
     \assumption[1]{\neg P}\\
-    \byrule[1]{\bot}{{\nor}E} \\
+    \byrule[1]{\bot}{{\neg}E} \\
     \assumption[1]{\neg Q}\\
-    \byrule[1]{\bot}{{\nor}E}\\
+    \byrule[1]{\bot}{{\neg}E}\\
     \byrule{\neg P \nor \neg Q}{{\nor}I}\\
     \bydefinition{P \wedge Q}
 \end{align*}
@@ -53,7 +92,38 @@
 % Therefore, wizardry?
 \[\inferrule{P \wedge Q}{P} \quad \inferrule{P \wedge Q}{Q} \quad ({\wedge}E)\]
 
+\begin{align*}
+    \premise{P \wedge Q}\\
+    \byrule{Q}{{\wedge}E}\\
+    \byrule{P}{{\wedge}E}\\
+    \byrule{Q \wedge P}{{\wedge}I}
+\end{align*}
+\[\inferrule{P \wedge Q}{Q \wedge P} \quad ({\wedge}S)\]
+
+\begin{align*}
+    \premise{(P \wedge Q) \wedge R}\\
+    \byrule{P \wedge Q}{{\wedge}E}\\
+    \byrule{P}{{\wedge}E}\\
+    \byrule{Q}{{\wedge}E}\\
+    \byrule{R}{{\wedge}E}\\
+    \byrule{Q \wedge R}{{\wedge}I}\\
+    \byrule{P \wedge (Q \wedge R)}{{\wedge}I}
+\end{align*}
+\[\inferrule{(P \wedge Q) \wedge R}{P \wedge (Q \wedge R)} \quad ({\wedge}T)\]
+
+\subsection{Disjunction}
+
+\begin{notation}
+    \[P \vee Q \coloneqq \neg (P \nor Q)\]
+\end{notation}
+
+% I'm guessing we'll have use of disjunction inference rules at some point?
+
 \subsection{Implication}
+
+\begin{notation}
+    \[P \Rightarrow Q \coloneqq \neg P \vee Q\]
+\end{notation}
 
 % P, P=>Q > Q
 \begin{align*}
@@ -92,22 +162,51 @@
 \begin{align*}
     \premise{\neg\neg P}\\
     \assumption[1]{\neg P}\\
-    \byrule[1]{\bot}{{\nor}E}\\
+    \byrule[1]{\bot}{{\neg}E}\\
     \byrule{P}{RAA}
 \end{align*}
 \[\inferrule{\neg\neg P}{P} \quad ({\neg}{\neg} E)\]
+
+% _ > P
+\begin{align*}
+    \premise{\bot}\\
+    \assumption[1]{\neg P}\\
+    \byrule{P}{RAA}
+\end{align*}
+\[\inferrule{\bot}{P} \quad ({\bot}E)\]
 
 \commentary{
     Substitution is capture-avoiding. Universal introduction requires the generalized variable to be absent from all undischarged assumptions. Existential elimination requires a fresh witness, absent from the conclusion and all other undischarged assumptions.
 }
 
 \subsection{Quantifiers}
+\begin{notation}
+    \begin{align*}
+        \forall a \in b: P &\coloneqq \forall a: (a \in b \Rightarrow P) \\
+        \forall a, b \in c: P &\coloneqq \forall a \in c: \forall b \in c: P \\
+        \forall a \in b; c \in d: P &\coloneqq \forall a \in b: \forall c \in d: P
+    \end{align*}   
+\end{notation}
 
-% Seriously thinking of adopting a quick def for \langle x \rangle - rustlers joy. DONE!
-\[\inferrule{\forall a: P\bound{a}}{P\bound{b}} \quad ({\forall}E)\]
-\[\inferrule{P\bound{a}}{\forall a: P\bound{a}} \quad ({\forall}I)\]
-\[\inferrule{P\bound{a}}{\exists b: P\bound{b}} \quad ({\exists}I)\]
-\[\inferrule{\exists a: P\bound{a} \\ [P\bound{b}] \cdots Q}{Q} \quad ({\exists}E)\]
+\begin{foundation}
+    % Seriously thinking of adopting a quick def for \langle x \rangle - rustlers joy. DONE!
+    \[\inferrule{P\bound{a}}{\forall a: P\bound{a}} \quad ({\forall}I)\]
+    \[\inferrule{\forall a: P\bound{a}}{P\bound{b}} \quad ({\forall}E)\]
+\end{foundation}
+
+\begin{notation}
+    \begin{align*}
+        \exists a: P &\coloneqq \neg(\forall a: \neg P) \\ % This should be the earliest point that we define existence.
+        \exists a \in b: P &\coloneqq \exists a: (a \in b \wedge P) \\
+        \exists a, b \in c: P &\coloneqq \exists a \in c: \exists b \in c: P \\
+        \exists a \in b; c \in d: P &\coloneqq \exists a \in b: \exists c \in d: P
+    \end{align*}
+\end{notation}
+% All of this again to introduce punctuation intuitively.
+\begin{foundation}
+    \[\inferrule{P\bound{a}}{\exists b: P\bound{b}} \quad ({\exists}I)\]
+\end{foundation}
+%\[\inferrule{\exists a: P\bound{a} \\ [P\bound{b}] \cdots Q}{Q} \quad ({\exists}E)\]
 % Any notion of bound and free variables above is implicit - no further explanation of these concepts is provided.
 
 % EVERYTHING BELOW THIS LINE IS LIKELY TO VANISH AT SOME POINT - CONSUMED OR DERIVED FROM THE NOR STUFFS ABOVE.
@@ -121,6 +220,10 @@
     \byrule{P \Rightarrow P}{{\Rightarrow}I}    
 \end{align*}
 \[\vdash P \Rightarrow P \quad ({\Rightarrow}R)\]
+
+\begin{notation}
+    \[P \Leftrightarrow Q \coloneqq (P \Rightarrow Q) \wedge (Q \Rightarrow P)\]
+\end{notation}
 
 % P=>Q, Q=>P > P<=>Q
 \begin{align*}
