@@ -5,11 +5,12 @@
 
 % Hopefully to include the leanest set of axioms here.
 \begin{foundation}
-    \[\mathsf{EXT} \vdash \forall a, b: ((\forall c: (c \in a \lequiv c \in b)) \implies a = b)\]
+    \[\vdash \forall a, b: ((\forall c: (c \in a \lequiv c \in b)) \implies a = b) \quad (\mathsf{EXT})\]
 \end{foundation}
 
 \begin{notation}
     \[a \notin b \coloneqq \neg(a \in b)\]
+    \[\norneg{\norin{a}{b}}\]
 \end{notation}
 
 \begin{align*}

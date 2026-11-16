@@ -4,8 +4,10 @@
 % Derive equality and its properties - I never liked the idea of just randomly adding equality as soon as you build out ZFC.
 
 \subsection{Definition}
+\newcommand{\noreq}[3]{\norforall{#3}{\norwedge{\norlequiv{\norin{#3}{#1}}{\norin{#3}{#2}}}{\norlequiv{\norin{#1}{#3}}{\norin{#2}{#3}}}}}
 \begin{notation}
     \[a = b \coloneqq \forall c: ((c \in a \lequiv c \in b) \wedge (a \in c \lequiv b \in c))\]
+    %\[\noreq{a}{b}{c}]\] % This thing is just flat out ridiculous :P
 \end{notation}
 
 \subsection{Properties}
@@ -19,7 +21,8 @@
     \bydefinition{a = a}\\
     \byrule{\forall a: a = a}{\forallI}
 \end{align*}
-\[\vdash \forall a: a = a \quad (\text{reflexivity})\]
+\newcommand{\eqR}{{=}\text{Refl}}
+\[\vdash \forall a: a = a \quad (\eqR)\]
 
 \begin{align*}
     \assumption[1]{a = b}\\
@@ -35,7 +38,8 @@
     \byrule{a = b \implies b = a}{\impliesI}\\
     \byrule{\forall a, b: (a = b \implies b = a)}{\forallI}\\
 \end{align*}
-\[\vdash \forall a, b: (a = b \implies b = a) \quad (\text{symmetry})\]
+\newcommand{\eqS}{{=}\text{Sym}}
+\[\vdash \forall a, b: (a = b \implies b = a) \quad (\eqS)\]
 
 \begin{align*}
     \assumption[1]{a = b \wedge b = c}\\
@@ -57,7 +61,8 @@
     \byrule{(a = b \wedge b = c) \implies a = c}{\impliesI}\\
     \byrule{\forall a, b, c: ((a = b \wedge b = c) \implies a = c)}{\forallI}
 \end{align*}
-\[\vdash \forall a, b, c: ((a = b \wedge b = c) \implies a = c) \quad (\text{transitivity})\]
+\newcommand{\eqT}{{=}\text{Trans}}
+\[\vdash \forall a, b, c: ((a = b \wedge b = c) \implies a = c) \quad (\eqT)\]
 
 \subsection{Substitution}
 \commentary{
@@ -80,7 +85,8 @@
     \byrule{c \in a \lequiv c \in b}{\wedgeE}\\
     \byrule{c \in b}{\lequivE}
 \end{align*}
-\[\inferrule{a = b \\ a \in c}{b \in c} \quad \inferrule{a = b \\ c \in a}{c \in b} \quad ({=}S)\]
+\newcommand{\eqSub}{{=}\text{Sub}}
+\[\inferrule{a = b \\ a \in c}{b \in c} \quad \inferrule{a = b \\ c \in a}{c \in b} \quad (\eqSub)\]
 
 \begin{align*}
     \premise{a = b}\\
@@ -89,14 +95,14 @@
     \byrule[1]{P\bound{b}}{{=}S}\\
     \byrule{P\bound{a} \implies P\bound{b}}{\impliesI}\\
     \assumption[1]{P\bound{b}}\\
-    \byrule[1]{P\bound{a}}{{=}S}\\
+    \byrule[1]{P\bound{a}}{\eqSub}\\
     \byrule{P\bound{b} \implies P\bound{a}}{\impliesI}\\
     \byrule{P\bound{a} \lequiv P\bound{b}}{\lequivI}\\
     \byrule{\forall c: (P\bound{a} \lequiv P\bound{b})}{\forallI}\\
     \byrule{(\forall c: P\bound{a}) \lequiv (\forall c: P\bound{b})}{\forallD}\\
     \byrule{\forall c: P\bound{b}}{\lequivE}
 \end{align*}
-\[\inferrule{a = b \\ \forall c: P\bound{a}}{\forall c: P\bound{b}} \quad ({=}S)\]
+\[\inferrule{a = b \\ \forall c: P\bound{a}}{\forall c: P\bound{b}} \quad (\eqSub)\]
 
 \begin{align*}
     \premise{a = b}\\
@@ -105,13 +111,13 @@
     \byrule[1]{P\bound{b}}{{=}S}\\
     \byrule{P\bound{a} \implies P\bound{b}}{\impliesI}\\
     \assumption[1]{P\bound{b}}\\
-    \byrule[1]{P\bound{a}}{{=}S}\\
+    \byrule[1]{P\bound{a}}{\eqSub}\\
     \byrule{P\bound{b} \implies P\bound{a}}{\impliesI}\\
     \byrule{P\bound{a} \lequiv P\bound{b}}{\lequivI}\\
     \byrule{Q \lequiv Q}{\lequivR}\\
     \byrule{(P\bound{a} \nor Q) \lequiv (P\bound{b} \nor Q)}{\norD}\\
     \byrule{P\bound{b} \nor Q}{\lequivE}
 \end{align*}
-\[\inferrule{a = b \\ P\bound{a} \nor Q}{P\bound{b} \nor Q} \quad ({=}S)\]
+\[\inferrule{a = b \\ P\bound{a} \nor Q}{P\bound{b} \nor Q} \quad (\eqSub)\]
 
-\[\boxed{\inferrule{a = b \\ P\bound{a}}{P\bound{b}} \quad ({=}E)}\]
+\[\boxed{\inferrule{a = b \\ P\bound{a}}{P\bound{b}} \quad (\eqSub)}\]

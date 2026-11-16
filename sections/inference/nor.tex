@@ -1,4 +1,9 @@
 \subsection{Contradiction}
+\newcommand{\norbot}[1]{{\nor}#1{\nor}#1#1}
+\begin{notation}
+    \[\bot \coloneqq P \nor (P \nor P) \qquad [\norbot{P}]\]
+\end{notation}
+
 \newcommand{\norE}{{\nor}E}
 \newcommand{\norI}{{\nor}I}
 \newcommand{\raaW}{RAA^{*}}
@@ -20,8 +25,9 @@
 %\[\inferrule{P \nor Q}{Q \nor P} \quad (\norC)\]
 
 \subsection{Negation}
+\newcommand{\norneg}[1]{{\nor}#1#1}
 \begin{notation}
-    \[\neg P \coloneqq P \nor P\]
+    \[\neg P \coloneqq P \nor P \qquad [\norneg{P}]\]
 \end{notation}
 
 \begin{align*}
@@ -54,6 +60,7 @@
 \begin{align*}
     \premise{\bot}\\
     \assumption[1]{\neg P}\\
+    \reiterate[1]{\bot}\\
     \byrule{P}{\raa}
 \end{align*}
 \newcommand{\botE}{{\bot}E}

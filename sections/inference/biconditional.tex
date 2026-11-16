@@ -1,7 +1,9 @@
 \subsection{Equivalence}
 
+\newcommand{\norlequiv}[2]{\norwedge{\norimplies{#1}{#2}}{\norimplies{#2}{#1}}}
 \begin{notation}
     \[P \lequiv Q \coloneqq (P \implies Q) \wedge (Q \implies P)\]
+    \[[\norlequiv{P}{Q}]\]
 \end{notation}
 
 % P=>Q, Q=>P > P<=>Q
@@ -25,20 +27,20 @@
     \bydefinition{(P \implies Q) \wedge (Q \implies P)}\\
     \byrule{Q \implies P}{\wedgeE}
 \end{align*}
-\newcommand{\lequivE}{{\lequiv}E}
-\[\inferrule{P \lequiv Q}{P \implies Q} \quad \inferrule{P \lequiv Q}{Q \implies P} \quad (\lequivE)\]
+\newcommand{\lequivU}{{\lequiv}\text{Unp}}
+\[\inferrule{P \lequiv Q}{P \implies Q} \quad \inferrule{P \lequiv Q}{Q \implies P} \quad (\lequivU)\]
 
 % P/Q, P<=>Q > Q/P
 \begin{align*}
     \premise{P}\\
     \premise{P \lequiv Q}\\
-    \byrule{P \implies Q}{\lequivE}\\
+    \byrule{P \implies Q}{\lequivU}\\
     \byrule{Q}{\impliesE}\\
 \end{align*}
 \begin{align*}
     \premise{Q}\\
     \premise{P \lequiv Q}\\
-    \byrule{Q \implies P}{\lequivE}\\
+    \byrule{Q \implies P}{\lequivU}\\
     \byrule{P}{\impliesE}\\
 \end{align*}
 \newcommand{\lequivE}{{\lequiv}E}
@@ -49,7 +51,7 @@
     \byrule{P \implies P}{\impliesR}\\
     \byrule{P \lequiv P}{\lequivI}
 \end{align*}
-\newcommand{\lequivR}{{\lequiv}R}
+\newcommand{\lequivR}{{\lequiv}\text{Refl}}
 \[\vdash P \lequiv P \quad (\lequivR)\]
 
 % P<=>Q > Q<=>P
@@ -59,7 +61,8 @@
     \byrule{Q \implies P}{\lequivE}\\
     \byrule{Q \lequiv P}{\lequivI}
 \end{align*}
-\newcommand{\lequivC}{{\lequiv}C}
+\newcommand{\lequivC}{{\lequiv}\text{Sym}}
+\newcommand{\lequivS}{{\lequiv}\text{Sym}} % Deprecated
 \[\inferrule{P \lequiv Q}{Q \lequiv P} \quad (\lequivC)\]
 
 % P<=>Q, Q<=>R > P<=>R
@@ -78,5 +81,35 @@
     \byrule{R \implies P}{\impliesI}\\
     \byrule{P \lequiv R}{\lequivI}
 \end{align*}
-\newcommand{\lequivA}{{\lequiv}A}
+\newcommand{\lequivT}{{\lequiv}\text{Trans}}
+\newcommand{\lequivA}{{\lequiv}\text{Trans}} % Deprecated
 \[\inferrule{P \lequiv Q \\ Q \lequiv R}{P \lequiv R} \quad (\lequivA)\]
+
+% P<=>Q, R<=>S > P|R<=>Q|S
+\begin{align*}
+    \premise{P \lequiv Q}\\
+    \premise{R \lequiv S}\\
+    \assumption[1]{P \nor R}\\
+    \assumption[2]{Q}\\
+    \byrule[2]{P}{\lequivE}\\
+    \byrule[2]{\bot}{\norE}\\
+    \assumption[2]{S}\\
+    \byrule[2]{R}{\lequivE}\\
+    \byrule[2]{\bot}{\norE}\\
+    \byrule[1]{Q \nor S}{\norI}\\
+    \byrule{(P \nor R) \implies (Q \nor S)}{\impliesI}\\
+    \assumption[1]{Q \nor S}\\
+    \assumption[2]{P}\\
+    \byrule[2]{Q}{\lequivE}\\
+    \byrule[2]{\bot}{\norE}\\
+    \assumption[2]{R}\\
+    \byrule[2]{S}{\lequivE}\\
+    \byrule[2]{\bot}{\norE}\\
+    \byrule[1]{P \nor R}{\norI}\\
+    \byrule{(Q \nor S) \implies (P \nor R)}{\impliesI}\\
+    \byrule{(P \nor R) \lequiv (Q \nor S)}{\lequivI}
+\end{align*}
+\newcommand{\norC}{{\nor}\text{Cong}}
+\newcommand{\norD}{{\nor}\text{Cong}} % Deprecated
+\[\inferrule{P \lequiv Q \\ R \lequiv S}{(P \nor R) \lequiv (Q \nor S)} \quad (\norC)\]
+

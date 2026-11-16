@@ -1,7 +1,8 @@
 \subsection{Implication}
 
+\newcommand{\norimplies}[2]{\norvee{\norneg{#1}}{#2}}
 \begin{notation}
-    \[P \implies Q \coloneqq \neg P \vee Q\]
+    \[P \implies Q \coloneqq \neg P \vee Q \qquad [\norimplies{P}{Q}]\]
 \end{notation}
 
 % [P]...Q > P=>Q
@@ -43,5 +44,5 @@
     \reiterate[1]{P}\\
     \byrule{P \implies P}{\impliesI}    
 \end{align*}
-\newcommand{\impliesR}{{\implies}R}
+\newcommand{\impliesR}{{\implies}\text{Refl}}
 \[\vdash P \implies P \quad (\impliesR)\]

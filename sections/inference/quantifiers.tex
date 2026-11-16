@@ -1,10 +1,13 @@
 \subsection{Quantifiers}
+\newcommand{\norforall}[2]{{\forall}#1#2}
+\newcommand{\norin}[2]{{\in}#1#2}
 \begin{notation}
     \begin{align*}
         \forall a \in b: P &\coloneqq \forall a: (a \in b \Rightarrow P) \\
         \forall a, b \in c: P &\coloneqq \forall a \in c: \forall b \in c: P \\
         \forall a \in b; c \in d: P &\coloneqq \forall a \in b: \forall c \in d: P
-    \end{align*}   
+    \end{align*}
+    \[[\norforall{a}{\norimplies{\norin{a}{b}}{P}}]\]
 \end{notation}
 
 \newcommand{\forallI}{{\forall}I}
@@ -14,6 +17,28 @@
     \[\inferrule{P\bound{a}}{\forall a: P\bound{a}} \quad (\forallI)\]
     \[\inferrule{\forall a: P\bound{a}}{P\bound{b}} \quad (\forallE)\]
 \end{foundation}
+
+% Aa:P<=>Q > Aa:P <=> Aa:Q
+\begin{align*}
+    \premise{\forall a: (P\bound{a} \lequiv Q\bound{a})}\\
+    \assumption[1]{\forall a: P\bound{a}}\\
+    \byrule[1]{P\bound{b}}{\forallE}\\
+    \byrule[1]{P\bound{b} \lequiv Q\bound{b}}{\forallE}\\
+    \byrule[1]{Q\bound{b}}{\lequivE}\\
+    \byrule[1]{\forall a: Q\bound{a}}{\forallI}\\
+    \byrule{(\forall a: P\bound{a}) \implies (\forall a: Q\bound{a})}{\impliesI}\\
+    \assumption[1]{\forall a: Q\bound{a}}\\
+    \byrule[1]{Q\bound{b}}{\forallE}\\
+    \byrule[1]{Q\bound{b} \lequiv P\bound{b}}{\forallE}\\
+    \byrule[1]{P\bound{b}}{\lequivE}\\
+    \byrule[1]{\forall a: P\bound{a}}{\forallI}\\
+    \byrule{(\forall a: Q\bound{a}) \implies (\forall a: P\bound{a})}{\impliesI}\\
+    \byrule{(\forall a: P\bound{a}) \lequiv (\forall a: Q\bound{a})}{\lequivI}
+\end{align*}
+\newcommand{\forallC}{{\forall}\text{Cong}}
+\newcommand{\forallD}{{\forall}\text{Cong}} % Deprecated
+\[\inferrule{\forall a: (P\bound{a} \lequiv Q\bound{a})}{(\forall a: P\bound{a}) \lequiv (\forall a: Q\bound{a})} \quad (\forallC)\]
+
 
 %\begin{notation}
 %    \begin{align*}
