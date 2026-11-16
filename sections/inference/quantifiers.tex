@@ -1,6 +1,7 @@
 \subsection{Quantifiers}
-\newcommand{\norforall}[2]{{\forall}#1#2}
-\newcommand{\norin}[2]{{\in}#1#2}
+
+\newcommand{\norin}[2]{{\in}#1#2} % NOR hacking
+\newcommand{\norforall}[2]{{\forall}#1#2} % NOR hacking
 \begin{notation}
     \begin{align*}
         \forall a \in b: P &\coloneqq \forall a: (a \in b \Rightarrow P) \\
@@ -10,35 +11,41 @@
     \[[\norforall{a}{\norimplies{\norin{a}{b}}{P}}]\]
 \end{notation}
 
-\newcommand{\forallI}{{\forall}I}
-\newcommand{\forallE}{{\forall}E}
 \begin{foundation}
     % Seriously thinking of adopting a quick def for \langle x \rangle - rustlers joy. DONE!
-    \[\inferrule{P\bound{a}}{\forall a: P\bound{a}} \quad (\forallI)\]
-    \[\inferrule{\forall a: P\bound{a}}{P\bound{b}} \quad (\forallE)\]
+    \begin{equation}
+        \inferrule{P\bound{a}}{\forall a: P\bound{a}}
+        \tag{{$\forall$}I}
+        \label{rule:universal-introduction}
+    \end{equation}
+    \begin{equation}
+        \inferrule{\forall a: P\bound{a}}{P\bound{b}}
+        \tag{{$\forall$}E}
+        \label{rule:universal-elimination}
+    \end{equation}
 \end{foundation}
 
 % Aa:P<=>Q > Aa:P <=> Aa:Q
 \begin{align*}
     \premise{\forall a: (P\bound{a} \lequiv Q\bound{a})}\\
     \assumption[1]{\forall a: P\bound{a}}\\
-    \byrule[1]{P\bound{b}}{\forallE}\\
-    \byrule[1]{P\bound{b} \lequiv Q\bound{b}}{\forallE}\\
-    \byrule[1]{Q\bound{b}}{\lequivE}\\
-    \byrule[1]{\forall a: Q\bound{a}}{\forallI}\\
-    \byrule{(\forall a: P\bound{a}) \implies (\forall a: Q\bound{a})}{\impliesI}\\
+    \byrule[1]{P\bound{b}}{\ref{rule:universal-elimination}}\\
+    \byrule[1]{P\bound{b} \lequiv Q\bound{b}}{\ref{rule:universal-elimination}}\\
+    \byrule[1]{Q\bound{b}}{\ref{rule:equivalence-elimination}}\\
+    \byrule[1]{\forall a: Q\bound{a}}{\ref{rule:universal-introduction}}\\
+    \byrule{(\forall a: P\bound{a}) \implies (\forall a: Q\bound{a})}{\ref{rule:conditional-introduction}}\\
     \assumption[1]{\forall a: Q\bound{a}}\\
-    \byrule[1]{Q\bound{b}}{\forallE}\\
-    \byrule[1]{Q\bound{b} \lequiv P\bound{b}}{\forallE}\\
-    \byrule[1]{P\bound{b}}{\lequivE}\\
-    \byrule[1]{\forall a: P\bound{a}}{\forallI}\\
-    \byrule{(\forall a: Q\bound{a}) \implies (\forall a: P\bound{a})}{\impliesI}\\
-    \byrule{(\forall a: P\bound{a}) \lequiv (\forall a: Q\bound{a})}{\lequivI}
+    \byrule[1]{Q\bound{b}}{\ref{rule:universal-elimination}}\\
+    \byrule[1]{Q\bound{b} \lequiv P\bound{b}}{\ref{rule:universal-elimination}}\\
+    \byrule[1]{P\bound{b}}{\ref{rule:equivalence-elimination}}\\
+    \byrule[1]{\forall a: P\bound{a}}{\ref{rule:universal-introduction}}\\
+    \byrule{(\forall a: Q\bound{a}) \implies (\forall a: P\bound{a})}{\ref{rule:conditional-introduction}}\\
+    \byrule{(\forall a: P\bound{a}) \lequiv (\forall a: Q\bound{a})}{\ref{rule:equivalence-introduction}}
 \end{align*}
-\newcommand{\forallC}{{\forall}\text{Cong}}
-\newcommand{\forallD}{{\forall}\text{Cong}} % Deprecated
-\[\inferrule{\forall a: (P\bound{a} \lequiv Q\bound{a})}{(\forall a: P\bound{a}) \lequiv (\forall a: Q\bound{a})} \quad (\forallC)\]
-
+\begin{equation}
+    \inferrule{\forall a: (P\bound{a} \lequiv Q\bound{a})}{(\forall a: P\bound{a}) \lequiv (\forall a: Q\bound{a})}
+    \label{rule:universal-congruence}
+\end{equation}
 
 %\begin{notation}
 %    \begin{align*}

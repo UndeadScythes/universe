@@ -1,67 +1,89 @@
 \subsection{Contradiction}
-\newcommand{\norbot}[1]{{\nor}#1{\nor}#1#1}
+
+\newcommand{\norbot}[1]{{\nor}#1{\nor}#1#1} % NOR hacking
 \begin{notation}
     \[\bot \coloneqq P \nor (P \nor P) \qquad [\norbot{P}]\]
 \end{notation}
 
-\newcommand{\norE}{{\nor}E}
-\newcommand{\norI}{{\nor}I}
-\newcommand{\raaW}{RAA^{*}}
 \begin{foundation}
-    \[\inferrule{P \nor Q \\ P}{\bot} \quad \inferrule{P \nor Q \\ Q}{\bot} \quad (\norE)\]
-    \[\inferrule{[P] \cdots \bot \\ [Q] \cdots \bot}{P \nor Q} \quad (\norI)\]
-    \[\inferrule{[P \nor P] \cdots \bot}{P} \quad (\raaW)\]
+    \begin{equation}
+        \inferrule{P \nor Q \\ P}{\bot} \quad \inferrule{P \nor Q \\ Q}{\bot}
+        \tag{{$\nor$}E}
+        \label{rule:nor-elimination}
+    \end{equation}
+    \begin{equation}
+        \inferrule{[P] \cdots \bot \\ [Q] \cdots \bot}{P \nor Q}
+        \tag{{$\nor$}I}
+        \label{rule:nor-introduction}
+    \end{equation}
+    \begin{equation}
+        \inferrule{[P \nor P] \cdots \bot}{P}
+        \label{rule:weak-reductio-ad-absurdum}
+    \end{equation}
 \end{foundation}
 
 %\begin{align*}
 %    \premise{P \nor Q}\\
 %    \assumption[1]{Q}\\
-%    \byrule[1]{\bot}{\norE}\\
+%    \byrule[1]{\bot}{\ref{rule:nor-elimination}}\\
 %    \assumption[1]{P}\\
-%    \byrule[1]{\bot}{\norE}\\
-%    \byrule{Q \nor P}{\norI}
+%    \byrule[1]{\bot}{\ref{rule:nor-elimination}}\\
+%    \byrule{Q \nor P}{\ref{rule:nor-introduction}}
 %\end{align*}
 %%\newcommand{\norC}{{\nor}C}
 %\[\inferrule{P \nor Q}{Q \nor P} \quad (\norC)\]
 
 \subsection{Negation}
-\newcommand{\norneg}[1]{{\nor}#1#1}
+
+\newcommand{\norneg}[1]{{\nor}#1#1} % NOR hacking
 \begin{notation}
     \[\neg P \coloneqq P \nor P \qquad [\norneg{P}]\]
 \end{notation}
 
 \begin{align*}
     \premise{[P] \cdots \bot}\\
-    \reiterate{[P] \cdots \bot}\\
-    \byrule{P \nor P}{\norI}\\
+    \given{[P] \cdots \bot}\\
+    \byrule{P \nor P}{\ref{rule:nor-introduction}}\\
     \bydefinition{\neg P}
 \end{align*}
-\newcommand{\negI}{{\neg}I}
-\[\inferrule{[P] \cdots \bot}{\neg P} \quad (\negI)\]
+\begin{equation}
+    \inferrule{[P] \cdots \bot}{\neg P}
+    \tag{{$\neg$}I}
+    \label{rule:negation-introduction}
+\end{equation}
 
 \begin{align*}
     \premise{\neg P}\\
     \premise{P}\\
     \bydefinition{P \nor P}\\
-    \byrule{\bot}{\norE}
+    \byrule{\bot}{\ref{rule:nor-elimination}}
 \end{align*}
-\newcommand{\negE}{{\neg}E}
-\[\inferrule{\neg P \\ P}{\bot} \quad (\negE)\]
+
+\begin{equation}
+    \inferrule{\neg P \\ P}{\bot}
+    \tag{{$\neg$}E}
+    \label{rule:negation-elimination}
+\end{equation}
 
 \begin{align*}
     \premise{[\neg P] \cdots \bot}\\
     \bydefinition{[P \nor P] \cdots \bot}\\
-    \byrule{P}{\raaW}
+    \byrule{P}{\ref{rule:weak-reductio-ad-absurdum}}
 \end{align*}
-\newcommand{\raa}{RAA}
-\[\inferrule{[\neg P] \cdots \bot}{P} \quad (\raa)\]
+\begin{equation}
+    \inferrule{[\neg P] \cdots \bot}{P}
+    \tag{RAA}
+    \label{rule:reductio-ad-absurdum}
+\end{equation}
 
 % _ > P
 \begin{align*}
     \premise{\bot}\\
     \assumption[1]{\neg P}\\
-    \reiterate[1]{\bot}\\
-    \byrule{P}{\raa}
+    \given[1]{\bot}\\
+    \byrule{P}{\ref{rule:reductio-ad-absurdum}}
 \end{align*}
-\newcommand{\botE}{{\bot}E}
-\[\inferrule{\bot}{P} \quad (\botE)\]
+\begin{equation}
+    \inferrule{\bot}{P}
+    \label{rule:deductive-explosion}
+\end{equation}

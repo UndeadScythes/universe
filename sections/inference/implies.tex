@@ -1,0 +1,56 @@
+\subsection{Implication}
+
+\newcommand{\norimplies}[2]{\norvee{\norneg{#1}}{#2}} % NOR hacking
+\begin{notation}
+    \[P \implies Q \coloneqq \neg P \vee Q \qquad [\norimplies{P}{Q}]\]
+\end{notation}
+
+% [P]...Q > P=>Q
+\begin{align*}
+    \premise{[P] \cdots Q}\\
+    \assumption[1]{\neg P \nor Q}\\
+    \assumption[2]{P}\\
+    \byrule[2]{Q}{\text{given}}\\
+    \byrule[2]{\bot}{\ref{rule:nor-elimination}}\\
+    \byrule[1]{\neg P}{\ref{rule:negation-introduction}}\\
+    \byrule[1]{\bot}{\ref{rule:nor-elimination}}\\
+    \byrule{\neg(\neg P \nor Q)}{\ref{rule:negation-introduction}}\\
+    \bydefinition{\neg P \vee Q}\\
+    \bydefinition{P \implies Q}
+\end{align*}
+\begin{equation}
+    \inferrule{[P] \cdots Q}{P \implies Q}
+    \tag{{$\implies$}I}
+    \label{rule:conditional-introduction}
+\end{equation}
+
+% P, P=>Q > Q
+\begin{align*}
+    \premise{P}\\
+    \premise{P \implies Q}\\
+    \bydefinition{\neg(\neg P \nor Q)}\\
+    \assumption[1]{\neg Q}\\
+    \assumption[2]{\neg P}\\
+    \byrule[2]{\bot}{\ref{rule:negation-elimination}}\\
+    \assumption[2]{Q}\\
+    \byrule[2]{\bot}{\ref{rule:negation-elimination}}\\
+    \byrule[1]{\neg P \nor Q}{\ref{rule:nor-introduction}}\\
+    \byrule[1]{\bot}{\ref{rule:negation-elimination}}\\
+    \byrule{Q}{\ref{rule:reductio-ad-absurdum}}
+\end{align*}
+\begin{equation}
+    \inferrule{P \\ P \implies Q}{Q}
+    \tag{{$\implies$}E}
+    \label{rule:conditional-elimination}
+\end{equation}
+
+% > P => P
+\begin{align*}
+    \assumption[1]{P}\\
+    \given[1]{P}\\
+    \byrule{P \implies P}{\ref{rule:conditional-introduction}}    
+\end{align*}
+\begin{equation}
+    \vdash P \implies P
+    \label{rule:conditional-reflexivity}
+\end{equation}

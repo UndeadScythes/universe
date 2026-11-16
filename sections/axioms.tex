@@ -5,7 +5,11 @@
 
 % Hopefully to include the leanest set of axioms here.
 \begin{foundation}
-    \[\vdash \forall a, b: ((\forall c: (c \in a \lequiv c \in b)) \implies a = b) \quad (\mathsf{EXT})\]
+    \begin{equation}
+        \vdash \forall a, b: ((\forall c: (c \in a \lequiv c \in b)) \implies a = b)
+        \tag{$\mathsf{EXT}$}
+        \label{axiom:extensionality}
+    \end{equation}
 \end{foundation}
 
 \begin{notation}
@@ -15,24 +19,27 @@
 
 \begin{align*}
     \assumption[1]{(\forall c: c \notin a) \wedge (\forall c: c \notin b)}\\
-    \byrule[1]{\forall c: c \notin a}{\wedgeE}\\
-    \byrule[1]{d \notin a}{\forallE}\\
+    \byrule[1]{\forall c: c \notin a}{\ref{rule:conjunction-elimination}}\\
+    \byrule[1]{d \notin a}{\ref{rule:universal-elimination}}\\
     \assumption[2]{d \in a}\\
-    \byrule[2]{\bot}{\negE}\\
-    \byrule[2]{d \in b}{\botE}\\
-    \byrule[1]{d \in a \implies d \in b}{\impliesI}\\
-    \byrule[1]{\forall c: c \notin b}{\wedgeE}\\
-    \byrule[1]{d \notin b}{\forallE}\\
+    \byrule[2]{\bot}{\ref{rule:negation-elimination}}\\
+    \byrule[2]{d \in b}{\ref{rule:deductive-explosion}}\\
+    \byrule[1]{d \in a \implies d \in b}{\ref{rule:conditional-introduction}}\\
+    \byrule[1]{\forall c: c \notin b}{\ref{rule:conjunction-elimination}}\\
+    \byrule[1]{d \notin b}{\ref{rule:universal-elimination}}\\
     \assumption[2]{d \in b}\\
-    \byrule[2]{\bot}{\negE}\\
-    \byrule[2]{d \in a}{\botE}\\
-    \byrule[1]{d \in b \implies d \in a}{\impliesI}\\
-    \byrule[1]{d \in a \lequiv d \in b}{\lequivI}\\
-    \byrule[1]{\forall d: (d \in a \lequiv d \in b)}{\forallI}\\
+    \byrule[2]{\bot}{\ref{rule:negation-elimination}}\\
+    \byrule[2]{d \in a}{\ref{rule:deductive-explosion}}\\
+    \byrule[1]{d \in b \implies d \in a}{\ref{rule:conditional-introduction}}\\
+    \byrule[1]{d \in a \lequiv d \in b}{\ref{rule:equivalence-introduction}}\\
+    \byrule[1]{\forall d: (d \in a \lequiv d \in b)}{\ref{rule:universal-introduction}}\\
     \axiom[1]{\forall e, f: ((\forall d: (d \in e \lequiv d \in f)) \implies e = f)}{EXT}\\
-    \byrule[1]{(\forall d: (d \in a \lequiv d \in b)) \implies a = b}{\forallE}\\
-    \byrule[1]{a = b}{\impliesE}\\
-    \byrule{((\forall c: c \notin a) \wedge (\forall c: c \notin b)) \implies a = b}{\impliesI}\\
-    \byrule{\forall a, b: (((\forall c: c \notin a) \wedge (\forall c: c \notin b)) \implies a = b)}{\forallI}
+    \byrule[1]{(\forall d: (d \in a \lequiv d \in b)) \implies a = b}{\ref{rule:universal-elimination}}\\
+    \byrule[1]{a = b}{\ref{rule:conditional-elimination}}\\
+    \byrule{((\forall c: c \notin a) \wedge (\forall c: c \notin b)) \implies a = b}{\ref{rule:conditional-introduction}}\\
+    \byrule{\forall a, b: (((\forall c: c \notin a) \wedge (\forall c: c \notin b)) \implies a = b)}{\ref{rule:universal-introduction}}
 \end{align*}
-\[\vdash \forall a, b: (((\forall c: c \notin a) \wedge (\forall c: c \notin b)) \implies a = b)\]
+\begin{equation}
+    \vdash \forall a, b: (((\forall c: c \notin a) \wedge (\forall c: c \notin b)) \implies a = b)
+    \label{rule:empty-set-uniqueness}
+\end{equation}

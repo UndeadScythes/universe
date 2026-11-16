@@ -1,0 +1,66 @@
+\subsection{Conjunction}
+
+\newcommand{\norwedge}[2]{{\nor}\norneg{#1}\norneg{#2}} % NOR hacking
+\begin{notation}
+    \[P \wedge Q \coloneqq \neg P \nor \neg Q \qquad [\norwedge{P}{Q}]\]
+\end{notation}
+
+% P, Q -> P and Q
+\begin{align*}
+    \premise{P}\\
+    \premise{Q}\\
+    \assumption[1]{\neg P}\\
+    \byrule[1]{\bot}{\ref{rule:negation-elimination}} \\
+    \assumption[1]{\neg Q}\\
+    \byrule[1]{\bot}{\ref{rule:negation-elimination}}\\
+    \byrule{\neg P \nor \neg Q}{\ref{rule:nor-introduction}}\\
+    \bydefinition{P \wedge Q}
+\end{align*}
+\begin{equation}
+    \inferrule{P \\ Q}{P \wedge Q}
+    \tag{{$\wedge$}I}
+    \label{rule:conjunction-introduction}
+\end{equation}
+
+% P and Q -> P, Q
+\begin{align*}
+    \premise{P \wedge Q}\\
+    \bydefinition{\neg P \nor \neg Q}\\
+    \assumption[1]{\neg P}\\
+    \byrule[1]{\bot}{\ref{rule:nor-elimination}}\\
+    \byrule{P}{\ref{rule:reductio-ad-absurdum}}
+\end{align*}
+\begin{align*}
+    \premise{P \wedge Q}\\
+    \bydefinition{\neg P \nor \neg Q}\\
+    \assumption[1]{\neg Q}\\
+    \byrule[1]{\bot}{\ref{rule:nor-elimination}}\\
+    \byrule{Q}{\ref{rule:reductio-ad-absurdum}}
+\end{align*}
+% Therefore, wizardry?
+\begin{equation}
+    \inferrule{P \wedge Q}{P} \quad \inferrule{P \wedge Q}{Q}
+    \tag{{$\wedge$}E}
+    \label{rule:conjunction-elimination}
+\end{equation}
+
+%\begin{align*}
+%    \premise{P \wedge Q}\\
+%    \byrule{Q}{\ref{rule:conjunction-elimination}}\\
+%    \byrule{P}{\ref{rule:conjunction-elimination}}\\
+%    \byrule{Q \wedge P}{\ref{rule:conjunction-introduction}}
+%\end{align*}
+%%\newcommand{\wedgeC}{{\wedge}C}
+%\[\inferrule{P \wedge Q}{Q \wedge P} \quad (\wedgeC)\]
+
+%\begin{align*}
+%    \premise{(P \wedge Q) \wedge R}\\
+%    \byrule{P \wedge Q}{\ref{rule:conjunction-elimination}}\\
+%    \byrule{P}{\ref{rule:conjunction-elimination}}\\
+%    \byrule{Q}{\ref{rule:conjunction-elimination}}\\
+%    \byrule{R}{\ref{rule:conjunction-elimination}}\\
+%    \byrule{Q \wedge R}{\ref{rule:conjunction-introduction}}\\
+%    \byrule{P \wedge (Q \wedge R)}{\ref{rule:conjunction-introduction}}
+%\end{align*}
+%%\newcommand{\wedgeA}{{\wedge}A}
+%\[\inferrule{(P \wedge Q) \wedge R}{P \wedge (Q \wedge R)} \quad (\wedgeA)\]

@@ -4,7 +4,7 @@
 % Derive equality and its properties - I never liked the idea of just randomly adding equality as soon as you build out ZFC.
 
 \subsection{Definition}
-\newcommand{\noreq}[3]{\norforall{#3}{\norwedge{\norlequiv{\norin{#3}{#1}}{\norin{#3}{#2}}}{\norlequiv{\norin{#1}{#3}}{\norin{#2}{#3}}}}}
+\newcommand{\noreq}[3]{\norforall{#3}{\norwedge{\norlequiv{\norin{#3}{#1}}{\norin{#3}{#2}}}{\norlequiv{\norin{#1}{#3}}{\norin{#2}{#3}}}}} % NOR hacking
 \begin{notation}
     \[a = b \coloneqq \forall c: ((c \in a \lequiv c \in b) \wedge (a \in c \lequiv b \in c))\]
     %\[\noreq{a}{b}{c}]\] % This thing is just flat out ridiculous :P
@@ -12,112 +12,129 @@
 
 \subsection{Properties}
 \begin{align*}
-    \byrule{d \in a \lequiv d \in a}{\lequivR}\\
-    \byrule{a \in d \lequiv a \in d}{\lequivR}\\
+    \byrule{d \in a \lequiv d \in a}{\ref{rule:equivalence-reflexivity}}\\
+    \byrule{a \in d \lequiv a \in d}{\ref{rule:equivalence-reflexivity}}\\
     \byrule{(d \in a \lequiv d \in a)
-        \wedge (a \in d \lequiv a \in d)}{\wedgeI}\\
+        \wedge (a \in d \lequiv a \in d)}{\ref{rule:conjunction-introduction}}\\
     \byrule{\forall d: ((d \in a \lequiv d \in a)
-        \wedge (a \in d \lequiv a \in d))}{\forallI}\\
+        \wedge (a \in d \lequiv a \in d))}{\ref{rule:universal-introduction}}\\
     \bydefinition{a = a}\\
-    \byrule{\forall a: a = a}{\forallI}
+    \byrule{\forall a: a = a}{\ref{rule:universal-introduction}}
 \end{align*}
-\newcommand{\eqR}{{=}\text{Refl}}
-\[\vdash \forall a: a = a \quad (\eqR)\]
+\begin{equation}
+    \vdash \forall a: a = a
+    \label{rule:equality-reflexivity}
+\end{equation}
 
 \begin{align*}
     \assumption[1]{a = b}\\
     \bydefinition[1]{\forall c: ((c \in a \lequiv c \in b) \wedge (a \in c \lequiv b \in c))}\\
-    \byrule[1]{(d \in a \lequiv d \in b) \wedge (a \in d \lequiv b \in d)}{\forallE}\\
-    \byrule[1]{d \in a \lequiv d \in b}{\wedgeE}\\
-    \byrule[1]{d \in b \lequiv d \in a}{\lequivC}\\
-    \byrule[1]{a \in d \lequiv b \in d}{\wedgeE}\\
-    \byrule[1]{b \in d \lequiv a \in d}{\lequivC}\\
-    \byrule[1]{(d \in b \lequiv d \in a) \wedge (b \in d \lequiv a \in d)}{\wedgeI}\\
-    \byrule[1]{\forall d: ((d \in b \lequiv d \in a) \wedge (b \in d \lequiv a \in d))}{\forallI}\\
+    \byrule[1]{(d \in a \lequiv d \in b) \wedge (a \in d \lequiv b \in d)}{\ref{rule:universal-elimination}}\\
+    \byrule[1]{d \in a \lequiv d \in b}{\ref{rule:conjunction-elimination}}\\
+    \byrule[1]{d \in b \lequiv d \in a}{\ref{rule:equivalence-symmetry}}\\
+    \byrule[1]{a \in d \lequiv b \in d}{\ref{rule:conjunction-elimination}}\\
+    \byrule[1]{b \in d \lequiv a \in d}{\ref{rule:equivalence-symmetry}}\\
+    \byrule[1]{(d \in b \lequiv d \in a) \wedge (b \in d \lequiv a \in d)}{\ref{rule:conjunction-introduction}}\\
+    \byrule[1]{\forall d: ((d \in b \lequiv d \in a) \wedge (b \in d \lequiv a \in d))}{\ref{rule:universal-introduction}}\\
     \bydefinition[1]{b = a}\\
-    \byrule{a = b \implies b = a}{\impliesI}\\
-    \byrule{\forall a, b: (a = b \implies b = a)}{\forallI}\\
+    \byrule{a = b \implies b = a}{\ref{rule:conditional-introduction}}\\
+    \byrule{\forall a, b: (a = b \implies b = a)}{\ref{rule:universal-introduction}}\\
 \end{align*}
-\newcommand{\eqS}{{=}\text{Sym}}
-\[\vdash \forall a, b: (a = b \implies b = a) \quad (\eqS)\]
+\begin{equation}
+    \vdash \forall a, b: (a = b \implies b = a)
+    \label{rule:equality-symmetry}
+\end{equation}
 
 \begin{align*}
     \assumption[1]{a = b \wedge b = c}\\
-    \byrule[1]{a = b}{\wedgeE}\\
+    \byrule[1]{a = b}{\ref{rule:conjunction-elimination}}\\
     \bydefinition[1]{\forall d: ((d \in a \lequiv d \in b) \wedge (a \in d \lequiv b \in d))}\\
-    \byrule[1]{(f \in a \lequiv f \in b) \wedge (a \in f \lequiv b \in f)}{\forallE}\\
-    \byrule[1]{f \in a \lequiv f \in b}{\wedgeE}\\
-    \byrule[1]{a \in f \lequiv b \in f}{\wedgeE}\\
-    \byrule[1]{b = c}{\wedgeE}\\
+    \byrule[1]{(f \in a \lequiv f \in b) \wedge (a \in f \lequiv b \in f)}{\ref{rule:universal-elimination}}\\
+    \byrule[1]{f \in a \lequiv f \in b}{\ref{rule:conjunction-elimination}}\\
+    \byrule[1]{a \in f \lequiv b \in f}{\ref{rule:conjunction-elimination}}\\
+    \byrule[1]{b = c}{\ref{rule:conjunction-elimination}}\\
     \bydefinition[1]{\forall e: ((e \in b \lequiv e \in c) \wedge (b \in e \lequiv c \in e))}\\
-    \byrule[1]{(f \in b \lequiv f \in c) \wedge (b \in f \lequiv c \in f)}{\forallE}\\
-    \byrule[1]{f \in b \lequiv f \in c}{\wedgeE}\\
-    \byrule[1]{b \in f \lequiv c \in f}{\wedgeE}\\
-    \byrule[1]{f \in a \lequiv f \in c}{\lequivA}\\
-    \byrule[1]{a \in f \lequiv c \in f}{\lequivA}\\
-    \byrule[1]{(f \in a \lequiv f \in c) \wedge (a \in f \lequiv c \in f)}{\wedgeI}\\
-    \byrule[1]{\forall f: ((f \in a \lequiv f \in c) \wedge (a \in f \lequiv c \in f))}{\forallI}\\
+    \byrule[1]{(f \in b \lequiv f \in c) \wedge (b \in f \lequiv c \in f)}{\ref{rule:universal-elimination}}\\
+    \byrule[1]{f \in b \lequiv f \in c}{\ref{rule:conjunction-elimination}}\\
+    \byrule[1]{b \in f \lequiv c \in f}{\ref{rule:conjunction-elimination}}\\
+    \byrule[1]{f \in a \lequiv f \in c}{\ref{rule:equivalence-transitivity}}\\
+    \byrule[1]{a \in f \lequiv c \in f}{\ref{rule:equivalence-transitivity}}\\
+    \byrule[1]{(f \in a \lequiv f \in c) \wedge (a \in f \lequiv c \in f)}{\ref{rule:conjunction-introduction}}\\
+    \byrule[1]{\forall f: ((f \in a \lequiv f \in c) \wedge (a \in f \lequiv c \in f))}{\ref{rule:universal-introduction}}\\
     \bydefinition[1]{a = c}\\
-    \byrule{(a = b \wedge b = c) \implies a = c}{\impliesI}\\
-    \byrule{\forall a, b, c: ((a = b \wedge b = c) \implies a = c)}{\forallI}
+    \byrule{(a = b \wedge b = c) \implies a = c}{\ref{rule:conditional-introduction}}\\
+    \byrule{\forall a, b, c: ((a = b \wedge b = c) \implies a = c)}{\ref{rule:universal-introduction}}
 \end{align*}
-\newcommand{\eqT}{{=}\text{Trans}}
-\[\vdash \forall a, b, c: ((a = b \wedge b = c) \implies a = c) \quad (\eqT)\]
+\begin{equation}
+    \vdash \forall a, b, c: ((a = b \wedge b = c) \implies a = c)
+    \label{rule:equality-transitivity}
+\end{equation}
 
 \subsection{Substitution}
 \commentary{
-    By structural induction on formulas. Within each inductive case, $({=}S)$ denotes substitution already established for the immediate subformulas.
+    By structural induction on formulas. Within each inductive case, $({=}Sub)$ denotes substitution already established for the immediate subformulas.
 }
 
 \begin{align*}
     \premise{a = b}\\
     \premise{a \in c}\\
     \bydefinition{\forall d: ((d \in a \lequiv d \in b) \wedge (a \in d \lequiv b \in d))}\\
-    \byrule{(c \in a \lequiv c \in b) \wedge (a \in c \lequiv b \in c)}{\forallE}\\
-    \byrule{a \in c \lequiv b \in c}{\wedgeE}\\
-    \byrule{b \in c}{\lequivE}
+    \byrule{(c \in a \lequiv c \in b) \wedge (a \in c \lequiv b \in c)}{\ref{rule:universal-elimination}}\\
+    \byrule{a \in c \lequiv b \in c}{\ref{rule:conjunction-elimination}}\\
+    \byrule{b \in c}{\ref{rule:equivalence-elimination}}
 \end{align*}
 \begin{align*}
     \premise{a = b}\\
     \premise{c \in a}\\
     \bydefinition{\forall d: ((d \in a \lequiv d \in b) \wedge (a \in d \lequiv b \in d))}\\
-    \byrule{(c \in a \lequiv c \in b) \wedge (a \in c \lequiv b \in c)}{\forallE}\\
-    \byrule{c \in a \lequiv c \in b}{\wedgeE}\\
-    \byrule{c \in b}{\lequivE}
+    \byrule{(c \in a \lequiv c \in b) \wedge (a \in c \lequiv b \in c)}{\ref{rule:universal-elimination}}\\
+    \byrule{c \in a \lequiv c \in b}{\ref{rule:conjunction-elimination}}\\
+    \byrule{c \in b}{\ref{rule:equivalence-elimination}}
 \end{align*}
-\newcommand{\eqSub}{{=}\text{Sub}}
-\[\inferrule{a = b \\ a \in c}{b \in c} \quad \inferrule{a = b \\ c \in a}{c \in b} \quad (\eqSub)\]
+\begin{equation}
+    \inferrule{a = b \\ a \in c}{b \in c} \quad \inferrule{a = b \\ c \in a}{c \in b}
+    \tag{{$=$}Sub}
+\end{equation}
 
 \begin{align*}
     \premise{a = b}\\
     \premise{\forall c: P\bound{a}}\\
     \assumption[1]{P\bound{a}}\\
-    \byrule[1]{P\bound{b}}{{=}S}\\
-    \byrule{P\bound{a} \implies P\bound{b}}{\impliesI}\\
+    \byrule[1]{P\bound{b}}{{=}Sub}\\
+    \byrule{P\bound{a} \implies P\bound{b}}{\ref{rule:conditional-introduction}}\\
     \assumption[1]{P\bound{b}}\\
-    \byrule[1]{P\bound{a}}{\eqSub}\\
-    \byrule{P\bound{b} \implies P\bound{a}}{\impliesI}\\
-    \byrule{P\bound{a} \lequiv P\bound{b}}{\lequivI}\\
-    \byrule{\forall c: (P\bound{a} \lequiv P\bound{b})}{\forallI}\\
-    \byrule{(\forall c: P\bound{a}) \lequiv (\forall c: P\bound{b})}{\forallD}\\
-    \byrule{\forall c: P\bound{b}}{\lequivE}
+    \byrule[1]{P\bound{a}}{=Sub}\\
+    \byrule{P\bound{b} \implies P\bound{a}}{\ref{rule:conditional-introduction}}\\
+    \byrule{P\bound{a} \lequiv P\bound{b}}{\ref{rule:equivalence-introduction}}\\
+    \byrule{\forall c: (P\bound{a} \lequiv P\bound{b})}{\ref{rule:universal-introduction}}\\
+    \byrule{(\forall c: P\bound{a}) \lequiv (\forall c: P\bound{b})}{\ref{rule:universal-congruence}}\\
+    \byrule{\forall c: P\bound{b}}{\ref{rule:equivalence-elimination}}
 \end{align*}
-\[\inferrule{a = b \\ \forall c: P\bound{a}}{\forall c: P\bound{b}} \quad (\eqSub)\]
+\begin{equation}
+    \inferrule{a = b \\ \forall c: P\bound{a}}{\forall c: P\bound{b}}
+    \tag{{$=$}Sub}
+\end{equation}
 
 \begin{align*}
     \premise{a = b}\\
     \premise{P\bound{a} \nor Q}\\
     \assumption[1]{P\bound{a}}\\
-    \byrule[1]{P\bound{b}}{{=}S}\\
-    \byrule{P\bound{a} \implies P\bound{b}}{\impliesI}\\
+    \byrule[1]{P\bound{b}}{{=}Sub}\\
+    \byrule{P\bound{a} \implies P\bound{b}}{\ref{rule:conditional-introduction}}\\
     \assumption[1]{P\bound{b}}\\
-    \byrule[1]{P\bound{a}}{\eqSub}\\
-    \byrule{P\bound{b} \implies P\bound{a}}{\impliesI}\\
-    \byrule{P\bound{a} \lequiv P\bound{b}}{\lequivI}\\
-    \byrule{Q \lequiv Q}{\lequivR}\\
-    \byrule{(P\bound{a} \nor Q) \lequiv (P\bound{b} \nor Q)}{\norD}\\
-    \byrule{P\bound{b} \nor Q}{\lequivE}
+    \byrule[1]{P\bound{a}}{=Sub}\\
+    \byrule{P\bound{b} \implies P\bound{a}}{\ref{rule:conditional-introduction}}\\
+    \byrule{P\bound{a} \lequiv P\bound{b}}{\ref{rule:equivalence-introduction}}\\
+    \byrule{Q \lequiv Q}{\ref{rule:equivalence-reflexivity}}\\
+    \byrule{(P\bound{a} \nor Q) \lequiv (P\bound{b} \nor Q)}{\ref{rule:equivalence-congruence}}\\
+    \byrule{P\bound{b} \nor Q}{\ref{rule:equivalence-elimination}}
 \end{align*}
-\[\inferrule{a = b \\ P\bound{a} \nor Q}{P\bound{b} \nor Q} \quad (\eqSub)\]
+\begin{equation}
+    \inferrule{a = b \\ P\bound{a} \nor Q}{P\bound{b} \nor Q}
+    \tag{{$=$}Sub}
+\end{equation}
 
-\[\boxed{\inferrule{a = b \\ P\bound{a}}{P\bound{b}} \quad (\eqSub)}\]
+\begin{equation}
+    \boxed{\inferrule{a = b \\ P\bound{a}}{P\bound{b}}}
+    \label{rule:equality-substitution}
+\end{equation}
