@@ -1,0 +1,31 @@
+\subsection{Quantifiers}
+\begin{notation}
+    \begin{align*}
+        \forall a \in b: P &\coloneqq \forall a: (a \in b \Rightarrow P) \\
+        \forall a, b \in c: P &\coloneqq \forall a \in c: \forall b \in c: P \\
+        \forall a \in b; c \in d: P &\coloneqq \forall a \in b: \forall c \in d: P
+    \end{align*}   
+\end{notation}
+
+\newcommand{\forallI}{{\forall}I}
+\newcommand{\forallE}{{\forall}E}
+\begin{foundation}
+    % Seriously thinking of adopting a quick def for \langle x \rangle - rustlers joy. DONE!
+    \[\inferrule{P\bound{a}}{\forall a: P\bound{a}} \quad (\forallI)\]
+    \[\inferrule{\forall a: P\bound{a}}{P\bound{b}} \quad (\forallE)\]
+\end{foundation}
+
+%\begin{notation}
+%    \begin{align*}
+%        \exists a: P &\coloneqq \neg(\forall a: \neg P) \\ % This should be the earliest point that we define existence.
+%        \exists a \in b: P &\coloneqq \exists a: (a \in b \wedge P) \\
+%        \exists a, b \in c: P &\coloneqq \exists a \in c: \exists b \in c: P \\
+%        \exists a \in b; c \in d: P &\coloneqq \exists a \in b: \exists c \in d: P
+%    \end{align*}
+%\end{notation}
+%% All of this again to introduce punctuation intuitively.
+%\begin{foundation}
+%    %\[\inferrule{P\bound{a}}{\exists b: P\bound{b}} \quad (\existsI)\]
+%\end{foundation}
+%\[\inferrule{\exists a: P\bound{a} \\ [P\bound{b}] \cdots Q}{Q} \quad (\existsE)\]
+% Any notion of bound and free variables above is implicit - no further explanation of these concepts is provided.

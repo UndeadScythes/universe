@@ -1,0 +1,82 @@
+\subsection{Equivalence}
+
+\begin{notation}
+    \[P \lequiv Q \coloneqq (P \implies Q) \wedge (Q \implies P)\]
+\end{notation}
+
+% P=>Q, Q=>P > P<=>Q
+\begin{align*}
+    \premise{P \implies Q}\\
+    \premise{Q \implies P}\\
+    \byrule{(P \implies Q) \wedge (Q \implies P)}{\wedgeI}\\
+    \bydefinition{P \lequiv Q}
+\end{align*}
+\newcommand{\lequivI}{{\lequiv}I}
+\[\inferrule{P \implies Q \\ Q \implies P}{P \lequiv Q} \quad (\lequivI)\]
+
+% P<=>Q > P=>Q, Q=>P
+\begin{align*}
+    \premise{P \lequiv Q}\\
+    \bydefinition{(P \implies Q) \wedge (Q \implies P)}\\
+    \byrule{P \implies Q}{\wedgeE}
+\end{align*}
+\begin{align*}
+    \premise{P \lequiv Q}\\
+    \bydefinition{(P \implies Q) \wedge (Q \implies P)}\\
+    \byrule{Q \implies P}{\wedgeE}
+\end{align*}
+\newcommand{\lequivE}{{\lequiv}E}
+\[\inferrule{P \lequiv Q}{P \implies Q} \quad \inferrule{P \lequiv Q}{Q \implies P} \quad (\lequivE)\]
+
+% P/Q, P<=>Q > Q/P
+\begin{align*}
+    \premise{P}\\
+    \premise{P \lequiv Q}\\
+    \byrule{P \implies Q}{\lequivE}\\
+    \byrule{Q}{\impliesE}\\
+\end{align*}
+\begin{align*}
+    \premise{Q}\\
+    \premise{P \lequiv Q}\\
+    \byrule{Q \implies P}{\lequivE}\\
+    \byrule{P}{\impliesE}\\
+\end{align*}
+\newcommand{\lequivE}{{\lequiv}E}
+\[\inferrule{P \\ P \lequiv Q}{Q} \quad \inferrule{Q \\ P \lequiv Q}{P} \quad (\lequivE)\]
+
+% > P<=>P
+\begin{align*}
+    \byrule{P \implies P}{\impliesR}\\
+    \byrule{P \lequiv P}{\lequivI}
+\end{align*}
+\newcommand{\lequivR}{{\lequiv}R}
+\[\vdash P \lequiv P \quad (\lequivR)\]
+
+% P<=>Q > Q<=>P
+\begin{align*}
+    \premise{P \lequiv Q}\\
+    \byrule{P \implies Q}{\lequivE}\\
+    \byrule{Q \implies P}{\lequivE}\\
+    \byrule{Q \lequiv P}{\lequivI}
+\end{align*}
+\newcommand{\lequivC}{{\lequiv}C}
+\[\inferrule{P \lequiv Q}{Q \lequiv P} \quad (\lequivC)\]
+
+% P<=>Q, Q<=>R > P<=>R
+\begin{align*}
+    \premise{P \lequiv Q}\\
+    \premise{Q \lequiv R}\\
+    \assumption[1]{P}\\
+    \byrule[1]{Q}{\lequivE}\\
+    \byrule[1]{R}{\lequivE}\\
+    \byrule{P \implies R}{\impliesI}\\
+    \byrule{R \lequiv Q}{\lequivC}\\
+    \byrule{Q \lequiv P}{\lequivC}\\
+    \assumption[1]{R}\\
+    \byrule[1]{Q}{\lequivE}\\
+    \byrule[1]{P}{\lequivE}\\
+    \byrule{R \implies P}{\impliesI}\\
+    \byrule{P \lequiv R}{\lequivI}
+\end{align*}
+\newcommand{\lequivA}{{\lequiv}A}
+\[\inferrule{P \lequiv Q \\ Q \lequiv R}{P \lequiv R} \quad (\lequivA)\]

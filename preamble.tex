@@ -1,36 +1,46 @@
+% These wonderful lads are a work in progress, I've not firmly settled on how I want them to display yet.
 \newtcolorbox{foundation}{
     before upper={
         \setlength{\abovedisplayskip}{0pt}
-        \setlength{\abovedisplayshortskip}{0pt}
-        \setlength{\belowdisplayskip}{0pt}
-        \setlength{\belowdisplayshortskip}{0pt}
-    },enhanced,
-    breakable,
+        %\setlength{\abovedisplayshortskip}{0pt}
+        %\setlength{\belowdisplayskip}{0pt}
+        %\setlength{\belowdisplayshortskip}{0pt}
+    },
+    %enhanced,
+    %breakable,
     colback=white,
     colframe=black,
     boxrule=1.5pt,
-    sharp corners
+    top=0em,
+    %sharp corners
 }
 \newtcolorbox{notation}{
     before upper={
         \setlength{\abovedisplayskip}{0pt}
-        \setlength{\abovedisplayshortskip}{0pt}
-        \setlength{\belowdisplayskip}{0pt}
-        \setlength{\belowdisplayshortskip}{0pt}
-    },enhanced,
-    breakable,
+        %\setlength{\abovedisplayshortskip}{0pt}
+        %\setlength{\belowdisplayskip}{0pt}
+        %\setlength{\belowdisplayshortskip}{0pt}
+    },
+    enhanced,
+    %breakable,
     colback=white,
-    sharp corners,
+    %sharp corners,
     frame hidden,
+    top=0em,
     borderline={0.6pt}{0pt}{black,dashed}
 }
-\newcommand{\commentary}[1]{%
+
+% For adding flavour text in the published articles.
+\newcommand{\commentary}[1]{
     \par\smallskip
-    {\small\color{gray}\itshape #1\par}%
+    {\small\color{gray}\itshape #1\par}
     \smallskip
 }
 
+% Rewrites for common logical wotsits.
 \newcommand{\nor}{\downarrow}
+\newcommand{\lequiv}{\Leftrightarrow} % logic equivalence / logically equivalent
+\newcommand{\oldimplies}{\implies}\renewcommand{\implies}{\Rightarrow} % I just prefer the shorter one, sorry.
 
 % INFERENCE
 \newcommand{\premise}[2][0]{& \hspace{#1em} #2 & \quad (\text{prem})}
@@ -41,4 +51,5 @@
 \newcommand{\byrule}[3][0]{& \hspace{#1em} #2 & \quad (#3)}
 \newcommand{\axiom}[3][0]{& \hspace{#1em} #2 & \quad (\mathsf{#3})}
 
+% This was a pain to write - the name "bound" only has meaning for the inference rules
 \newcommand{\bound}[1]{\langle #1 \rangle}

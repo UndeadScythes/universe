@@ -1,0 +1,60 @@
+\subsection{Contradiction}
+\newcommand{\norE}{{\nor}E}
+\newcommand{\norI}{{\nor}I}
+\newcommand{\raaW}{RAA^{*}}
+\begin{foundation}
+    \[\inferrule{P \nor Q \\ P}{\bot} \quad \inferrule{P \nor Q \\ Q}{\bot} \quad (\norE)\]
+    \[\inferrule{[P] \cdots \bot \\ [Q] \cdots \bot}{P \nor Q} \quad (\norI)\]
+    \[\inferrule{[P \nor P] \cdots \bot}{P} \quad (\raaW)\]
+\end{foundation}
+
+%\begin{align*}
+%    \premise{P \nor Q}\\
+%    \assumption[1]{Q}\\
+%    \byrule[1]{\bot}{\norE}\\
+%    \assumption[1]{P}\\
+%    \byrule[1]{\bot}{\norE}\\
+%    \byrule{Q \nor P}{\norI}
+%\end{align*}
+%%\newcommand{\norC}{{\nor}C}
+%\[\inferrule{P \nor Q}{Q \nor P} \quad (\norC)\]
+
+\subsection{Negation}
+\begin{notation}
+    \[\neg P \coloneqq P \nor P\]
+\end{notation}
+
+\begin{align*}
+    \premise{[P] \cdots \bot}\\
+    \reiterate{[P] \cdots \bot}\\
+    \byrule{P \nor P}{\norI}\\
+    \bydefinition{\neg P}
+\end{align*}
+\newcommand{\negI}{{\neg}I}
+\[\inferrule{[P] \cdots \bot}{\neg P} \quad (\negI)\]
+
+\begin{align*}
+    \premise{\neg P}\\
+    \premise{P}\\
+    \bydefinition{P \nor P}\\
+    \byrule{\bot}{\norE}
+\end{align*}
+\newcommand{\negE}{{\neg}E}
+\[\inferrule{\neg P \\ P}{\bot} \quad (\negE)\]
+
+\begin{align*}
+    \premise{[\neg P] \cdots \bot}\\
+    \bydefinition{[P \nor P] \cdots \bot}\\
+    \byrule{P}{\raaW}
+\end{align*}
+\newcommand{\raa}{RAA}
+\[\inferrule{[\neg P] \cdots \bot}{P} \quad (\raa)\]
+
+% _ > P
+\begin{align*}
+    \premise{\bot}\\
+    \assumption[1]{\neg P}\\
+    \byrule{P}{\raa}
+\end{align*}
+\newcommand{\botE}{{\bot}E}
+\[\inferrule{\bot}{P} \quad (\botE)\]

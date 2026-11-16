@@ -5,59 +5,59 @@
 
 \subsection{Definition}
 \begin{notation}
-    \[a = b \coloneqq \forall c: ((c \in a \Leftrightarrow c \in b) \wedge (a \in c \Leftrightarrow b \in c))\]
+    \[a = b \coloneqq \forall c: ((c \in a \lequiv c \in b) \wedge (a \in c \lequiv b \in c))\]
 \end{notation}
 
 \subsection{Properties}
 \begin{align*}
-    \byrule{d \in a \Leftrightarrow d \in a}{{\Leftrightarrow}R}\\
-    \byrule{a \in d \Leftrightarrow a \in d}{{\Leftrightarrow}R}\\
-    \byrule{(d \in a \Leftrightarrow d \in a)
-        \wedge (a \in d \Leftrightarrow a \in d)}{{\wedge}I}\\
-    \byrule{\forall d: ((d \in a \Leftrightarrow d \in a)
-        \wedge (a \in d \Leftrightarrow a \in d))}{{\forall}I}\\
+    \byrule{d \in a \lequiv d \in a}{\lequivR}\\
+    \byrule{a \in d \lequiv a \in d}{\lequivR}\\
+    \byrule{(d \in a \lequiv d \in a)
+        \wedge (a \in d \lequiv a \in d)}{\wedgeI}\\
+    \byrule{\forall d: ((d \in a \lequiv d \in a)
+        \wedge (a \in d \lequiv a \in d))}{\forallI}\\
     \bydefinition{a = a}\\
-    \byrule{\forall a: a = a}{{\forall}I}
+    \byrule{\forall a: a = a}{\forallI}
 \end{align*}
 \[\vdash \forall a: a = a \quad (\text{reflexivity})\]
 
 \begin{align*}
     \assumption[1]{a = b}\\
-    \bydefinition[1]{\forall c: ((c \in a \Leftrightarrow c \in b) \wedge (a \in c \Leftrightarrow b \in c))}\\
-    \byrule[1]{(d \in a \Leftrightarrow d \in b) \wedge (a \in d \Leftrightarrow b \in d)}{{\forall}E}\\
-    \byrule[1]{d \in a \Leftrightarrow d \in b}{{\wedge}E}\\
-    \byrule[1]{d \in b \Leftrightarrow d \in a}{{\Leftrightarrow}S}\\
-    \byrule[1]{a \in d \Leftrightarrow b \in d}{{\wedge}E}\\
-    \byrule[1]{b \in d \Leftrightarrow a \in d}{{\Leftrightarrow}S}\\
-    \byrule[1]{(d \in b \Leftrightarrow d \in a) \wedge (b \in d \Leftrightarrow a \in d)}{{\wedge}I}\\
-    \byrule[1]{\forall d: ((d \in b \Leftrightarrow d \in a) \wedge (b \in d \Leftrightarrow a \in d))}{{\forall}I}\\
+    \bydefinition[1]{\forall c: ((c \in a \lequiv c \in b) \wedge (a \in c \lequiv b \in c))}\\
+    \byrule[1]{(d \in a \lequiv d \in b) \wedge (a \in d \lequiv b \in d)}{\forallE}\\
+    \byrule[1]{d \in a \lequiv d \in b}{\wedgeE}\\
+    \byrule[1]{d \in b \lequiv d \in a}{\lequivC}\\
+    \byrule[1]{a \in d \lequiv b \in d}{\wedgeE}\\
+    \byrule[1]{b \in d \lequiv a \in d}{\lequivC}\\
+    \byrule[1]{(d \in b \lequiv d \in a) \wedge (b \in d \lequiv a \in d)}{\wedgeI}\\
+    \byrule[1]{\forall d: ((d \in b \lequiv d \in a) \wedge (b \in d \lequiv a \in d))}{\forallI}\\
     \bydefinition[1]{b = a}\\
-    \byrule{a = b \Rightarrow b = a}{{\Rightarrow}I}\\
-    \byrule{\forall a, b: (a = b \Rightarrow b = a)}{{\forall}I}\\
+    \byrule{a = b \implies b = a}{\impliesI}\\
+    \byrule{\forall a, b: (a = b \implies b = a)}{\forallI}\\
 \end{align*}
-\[\vdash \forall a, b: (a = b \Rightarrow b = a) \quad (\text{symmetry})\]
+\[\vdash \forall a, b: (a = b \implies b = a) \quad (\text{symmetry})\]
 
 \begin{align*}
     \assumption[1]{a = b \wedge b = c}\\
-    \byrule[1]{a = b}{{\wedge}E}\\
-    \bydefinition[1]{\forall d: ((d \in a \Leftrightarrow d \in b) \wedge (a \in d \Leftrightarrow b \in d))}\\
-    \byrule[1]{(f \in a \Leftrightarrow f \in b) \wedge (a \in f \Leftrightarrow b \in f)}{{\forall}E}\\
-    \byrule[1]{f \in a \Leftrightarrow f \in b}{{\wedge}E}\\
-    \byrule[1]{a \in f \Leftrightarrow b \in f}{{\wedge}E}\\
-    \byrule[1]{b = c}{{\wedge}E}\\
-    \bydefinition[1]{\forall e: ((e \in b \Leftrightarrow e \in c) \wedge (b \in e \Leftrightarrow c \in e))}\\
-    \byrule[1]{(f \in b \Leftrightarrow f \in c) \wedge (b \in f \Leftrightarrow c \in f)}{{\forall}E}\\
-    \byrule[1]{f \in b \Leftrightarrow f \in c}{{\wedge}E}\\
-    \byrule[1]{b \in f \Leftrightarrow c \in f}{{\wedge}E}\\
-    \byrule[1]{f \in a \Leftrightarrow f \in c}{{\Leftrightarrow}T}\\
-    \byrule[1]{a \in f \Leftrightarrow c \in f}{{\Leftrightarrow}T}\\
-    \byrule[1]{(f \in a \Leftrightarrow f \in c) \wedge (a \in f \Leftrightarrow c \in f)}{{\wedge}I}\\
-    \byrule[1]{\forall f: ((f \in a \Leftrightarrow f \in c) \wedge (a \in f \Leftrightarrow c \in f))}{{\forall}I}\\
+    \byrule[1]{a = b}{\wedgeE}\\
+    \bydefinition[1]{\forall d: ((d \in a \lequiv d \in b) \wedge (a \in d \lequiv b \in d))}\\
+    \byrule[1]{(f \in a \lequiv f \in b) \wedge (a \in f \lequiv b \in f)}{\forallE}\\
+    \byrule[1]{f \in a \lequiv f \in b}{\wedgeE}\\
+    \byrule[1]{a \in f \lequiv b \in f}{\wedgeE}\\
+    \byrule[1]{b = c}{\wedgeE}\\
+    \bydefinition[1]{\forall e: ((e \in b \lequiv e \in c) \wedge (b \in e \lequiv c \in e))}\\
+    \byrule[1]{(f \in b \lequiv f \in c) \wedge (b \in f \lequiv c \in f)}{\forallE}\\
+    \byrule[1]{f \in b \lequiv f \in c}{\wedgeE}\\
+    \byrule[1]{b \in f \lequiv c \in f}{\wedgeE}\\
+    \byrule[1]{f \in a \lequiv f \in c}{\lequivA}\\
+    \byrule[1]{a \in f \lequiv c \in f}{\lequivA}\\
+    \byrule[1]{(f \in a \lequiv f \in c) \wedge (a \in f \lequiv c \in f)}{\wedgeI}\\
+    \byrule[1]{\forall f: ((f \in a \lequiv f \in c) \wedge (a \in f \lequiv c \in f))}{\forallI}\\
     \bydefinition[1]{a = c}\\
-    \byrule{(a = b \wedge b = c) \Rightarrow a = c}{{\Rightarrow}I}\\
-    \byrule{\forall a, b, c: ((a = b \wedge b = c) \Rightarrow a = c)}{{\forall}I}
+    \byrule{(a = b \wedge b = c) \implies a = c}{\impliesI}\\
+    \byrule{\forall a, b, c: ((a = b \wedge b = c) \implies a = c)}{\forallI}
 \end{align*}
-\[\vdash \forall a, b, c: ((a = b \wedge b = c) \Rightarrow a = c) \quad (\text{transitivity})\]
+\[\vdash \forall a, b, c: ((a = b \wedge b = c) \implies a = c) \quad (\text{transitivity})\]
 
 \subsection{Substitution}
 \commentary{
@@ -67,18 +67,18 @@
 \begin{align*}
     \premise{a = b}\\
     \premise{a \in c}\\
-    \bydefinition{\forall d: ((d \in a \Leftrightarrow d \in b) \wedge (a \in d \Leftrightarrow b \in d))}\\
-    \byrule{(c \in a \Leftrightarrow c \in b) \wedge (a \in c \Leftrightarrow b \in c)}{{\forall}E}\\
-    \byrule{a \in c \Leftrightarrow b \in c}{{\wedge}E}\\
-    \byrule{b \in c}{{\Leftrightarrow}E}
+    \bydefinition{\forall d: ((d \in a \lequiv d \in b) \wedge (a \in d \lequiv b \in d))}\\
+    \byrule{(c \in a \lequiv c \in b) \wedge (a \in c \lequiv b \in c)}{\forallE}\\
+    \byrule{a \in c \lequiv b \in c}{\wedgeE}\\
+    \byrule{b \in c}{\lequivE}
 \end{align*}
 \begin{align*}
     \premise{a = b}\\
     \premise{c \in a}\\
-    \bydefinition{\forall d: ((d \in a \Leftrightarrow d \in b) \wedge (a \in d \Leftrightarrow b \in d))}\\
-    \byrule{(c \in a \Leftrightarrow c \in b) \wedge (a \in c \Leftrightarrow b \in c)}{{\forall}E}\\
-    \byrule{c \in a \Leftrightarrow c \in b}{{\wedge}E}\\
-    \byrule{c \in b}{{\Leftrightarrow}E}
+    \bydefinition{\forall d: ((d \in a \lequiv d \in b) \wedge (a \in d \lequiv b \in d))}\\
+    \byrule{(c \in a \lequiv c \in b) \wedge (a \in c \lequiv b \in c)}{\forallE}\\
+    \byrule{c \in a \lequiv c \in b}{\wedgeE}\\
+    \byrule{c \in b}{\lequivE}
 \end{align*}
 \[\inferrule{a = b \\ a \in c}{b \in c} \quad \inferrule{a = b \\ c \in a}{c \in b} \quad ({=}S)\]
 
@@ -87,14 +87,14 @@
     \premise{\forall c: P\bound{a}}\\
     \assumption[1]{P\bound{a}}\\
     \byrule[1]{P\bound{b}}{{=}S}\\
-    \byrule{P\bound{a} \Rightarrow P\bound{b}}{{\Rightarrow}I}\\
+    \byrule{P\bound{a} \implies P\bound{b}}{\impliesI}\\
     \assumption[1]{P\bound{b}}\\
     \byrule[1]{P\bound{a}}{{=}S}\\
-    \byrule{P\bound{b} \Rightarrow P\bound{a}}{{\Rightarrow}I}\\
-    \byrule{P\bound{a} \Leftrightarrow P\bound{b}}{{\Leftrightarrow}I}\\
-    \byrule{\forall c: (P\bound{a} \Leftrightarrow P\bound{b})}{{\forall}I}\\
-    \byrule{(\forall c: P\bound{a}) \Leftrightarrow (\forall c: P\bound{b})}{{\forall}D}\\
-    \byrule{\forall c: P\bound{b}}{{\Leftrightarrow}E}
+    \byrule{P\bound{b} \implies P\bound{a}}{\impliesI}\\
+    \byrule{P\bound{a} \lequiv P\bound{b}}{\lequivI}\\
+    \byrule{\forall c: (P\bound{a} \lequiv P\bound{b})}{\forallI}\\
+    \byrule{(\forall c: P\bound{a}) \lequiv (\forall c: P\bound{b})}{\forallD}\\
+    \byrule{\forall c: P\bound{b}}{\lequivE}
 \end{align*}
 \[\inferrule{a = b \\ \forall c: P\bound{a}}{\forall c: P\bound{b}} \quad ({=}S)\]
 
@@ -103,14 +103,14 @@
     \premise{P\bound{a} \nor Q}\\
     \assumption[1]{P\bound{a}}\\
     \byrule[1]{P\bound{b}}{{=}S}\\
-    \byrule{P\bound{a} \Rightarrow P\bound{b}}{{\Rightarrow}I}\\
+    \byrule{P\bound{a} \implies P\bound{b}}{\impliesI}\\
     \assumption[1]{P\bound{b}}\\
     \byrule[1]{P\bound{a}}{{=}S}\\
-    \byrule{P\bound{b} \Rightarrow P\bound{a}}{{\Rightarrow}I}\\
-    \byrule{P\bound{a} \Leftrightarrow P\bound{b}}{{\Leftrightarrow}I}\\
-    \byrule{Q \Leftrightarrow Q}{{\Leftrightarrow}R}\\
-    \byrule{(P\bound{a} \nor Q) \Leftrightarrow (P\bound{b} \nor Q)}{{\nor}D}\\
-    \byrule{P\bound{b} \nor Q}{{\Leftrightarrow}E}
+    \byrule{P\bound{b} \implies P\bound{a}}{\impliesI}\\
+    \byrule{P\bound{a} \lequiv P\bound{b}}{\lequivI}\\
+    \byrule{Q \lequiv Q}{\lequivR}\\
+    \byrule{(P\bound{a} \nor Q) \lequiv (P\bound{b} \nor Q)}{\norD}\\
+    \byrule{P\bound{b} \nor Q}{\lequivE}
 \end{align*}
 \[\inferrule{a = b \\ P\bound{a} \nor Q}{P\bound{b} \nor Q} \quad ({=}S)\]
 

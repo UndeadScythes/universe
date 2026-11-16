@@ -1,0 +1,47 @@
+%\subsection{Tricks}
+
+
+% P<=>Q, R<=>S > P|R<=>Q|S
+%\begin{align*}
+%    \premise{P \lequiv Q}\\
+%    \premise{R \lequiv S}\\
+%    \assumption[1]{P \nor R}\\
+%    \assumption[2]{Q}\\
+%    \byrule[2]{P}{\lequivE}\\
+%    \byrule[2]{\bot}{\norE}\\
+%    \assumption[2]{S}\\
+%    \byrule[2]{R}{\lequivE}\\
+%    \byrule[2]{\bot}{\norE}\\
+%    \byrule[1]{Q \nor S}{\norI}\\
+%    \byrule{(P \nor R) \implies (Q \nor S)}{\impliesI}\\
+%    \assumption[1]{Q \nor S}\\
+%    \assumption[2]{P}\\
+%    \byrule[2]{Q}{\lequivE}\\
+%    \byrule[2]{\bot}{\norE}\\
+%    \assumption[2]{R}\\
+%    \byrule[2]{S}{\lequivE}\\
+%    \byrule[2]{\bot}{\norE}\\
+%    \byrule[1]{P \nor R}{\norI}\\
+%    \byrule{(Q \nor S) \implies (P \nor R)}{\impliesI}\\
+%    \byrule{(P \nor R) \lequiv (Q \nor S)}{\lequivI}
+%\end{align*}
+%\[\inferrule{P \lequiv Q \\ R \lequiv S}{(P \nor R) \lequiv (Q \nor S)} \quad (\norD)\]
+
+% Aa:P<=>Q > Aa:P <=> Aa:Q
+%\begin{align*}
+%    \premise{\forall a: (P\bound{a} \lequiv Q\bound{a})}\\
+%    \assumption[1]{\forall a: P\bound{a}}\\
+%    \byrule[1]{P\bound{b}}{\forallE}\\
+%    \byrule[1]{P\bound{b} \lequiv Q\bound{b}}{\forallE}\\
+%    \byrule[1]{Q\bound{b}}{\lequivE}\\
+%    \byrule[1]{\forall a: Q\bound{a}}{\forallI}\\
+%    \byrule{(\forall a: P\bound{a}) \implies (\forall a: Q\bound{a})}{\impliesI}\\
+%    \assumption[1]{\forall a: Q\bound{a}}\\
+%    \byrule[1]{Q\bound{b}}{\forallE}\\
+%    \byrule[1]{Q\bound{b} \lequiv P\bound{b}}{\forallE}\\
+%    \byrule[1]{P\bound{b}}{\lequivE}\\
+%    \byrule[1]{\forall a: P\bound{a}}{\forallI}\\
+%    \byrule{(\forall a: Q\bound{a}) \implies (\forall a: P\bound{a})}{\impliesI}\\
+%    \byrule{(\forall a: P\bound{a}) \lequiv (\forall a: Q\bound{a})}{\lequivI}
+%\end{align*}
+%\[\inferrule{\forall a: (P\bound{a} \lequiv Q\bound{a})}{(\forall a: P\bound{a}) \lequiv (\forall a: Q\bound{a})} \quad (\forallD)\]
