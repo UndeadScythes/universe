@@ -36,7 +36,7 @@
     \byrule{(\forall a: P\bound{a}) \implies (\forall a: Q\bound{a})}{\ref{rule:conditional-introduction}}\\
     \assumption[1]{\forall a: Q\bound{a}}\\
     \byrule[1]{Q\bound{b}}{\ref{rule:universal-elimination}}\\
-    \byrule[1]{Q\bound{b} \lequiv P\bound{b}}{\ref{rule:universal-elimination}}\\
+    \byrule[1]{P\bound{b} \lequiv Q\bound{b}}{\ref{rule:universal-elimination}}\\
     \byrule[1]{P\bound{b}}{\ref{rule:equivalence-elimination}}\\
     \byrule[1]{\forall a: P\bound{a}}{\ref{rule:universal-introduction}}\\
     \byrule{(\forall a: Q\bound{a}) \implies (\forall a: P\bound{a})}{\ref{rule:conditional-introduction}}\\

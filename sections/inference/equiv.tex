@@ -67,8 +67,8 @@
 % P<=>Q > Q<=>P
 \begin{align*}
     \premise{P \lequiv Q}\\
-    \byrule{P \implies Q}{\ref{rule:equivalence-elimination}}\\
-    \byrule{Q \implies P}{\ref{rule:equivalence-elimination}}\\
+    \byrule{P \implies Q}{\ref{rule:equivalence-unpacking}}\\
+    \byrule{Q \implies P}{\ref{rule:equivalence-unpacking}}\\
     \byrule{Q \lequiv P}{\ref{rule:equivalence-introduction}}
 \end{align*}
 \begin{equation}
@@ -123,6 +123,6 @@
 \end{align*}
 \begin{equation}
     \inferrule{P \lequiv Q \\ R \lequiv S}{(P \nor R) \lequiv (Q \nor S)}
-    \label{rule:equivalence-congruence}
+    \label{rule:nor-congruence}
 \end{equation}
 
