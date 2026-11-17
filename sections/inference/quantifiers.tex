@@ -47,14 +47,63 @@
     \label{rule:universal-congruence}
 \end{equation}
 
-%\begin{notation}
-%    \begin{align*}
-%        \exists a: P &\coloneqq \neg(\forall a: \neg P) \\ % This should be the earliest point that we define existence.
-%        \exists a \in b: P &\coloneqq \exists a: (a \in b \wedge P) \\
-%        \exists a, b \in c: P &\coloneqq \exists a \in c: \exists b \in c: P \\
-%        \exists a \in b; c \in d: P &\coloneqq \exists a \in b: \exists c \in d: P
-%    \end{align*}
-%\end{notation}
+\newcommand{\norexists}[2]{\norneg{\norforall{#1}{\norneg{#2}}}} % NOR hacking
+\begin{notation}
+    \begin{align*}
+        \exists a: P &\coloneqq \neg(\forall a: \neg P) \\ % This should be the earliest point that we define existence.
+        \exists a \in b: P &\coloneqq \exists a: (a \in b \wedge P) \\
+        \exists a, b \in c: P &\coloneqq \exists a \in c: \exists b \in c: P \\
+        \exists a \in b; c \in d: P &\coloneqq \exists a \in b: \exists c \in d: P
+    \end{align*}
+    \[[\norexists{a}{P}]\]
+\end{notation}
+
+\begin{align*}
+    \premise{P\bound{a}}\\
+    \assumption[1]{\forall b: \neg P\bound{b}}\\
+    \byrule[1]{\neg P\bound{a}}{\ref{rule:universal-elimination}}\\
+    \byrule[1]{\bot}{\ref{rule:negation-elimination}}\\
+    \byrule{\neg (\forall b: \neg P\bound{b})}{\ref{rule:negation-introduction}}\\
+    \bydefinition{\exists b: P\bound{b}}
+\end{align*}
+\begin{equation}
+    \inferrule{P\bound{a}}{\exists b: P\bound{b}}
+    \tag{{$\exists$}I}
+    \label{rule:existential-introduction}
+\end{equation}
+
+\begin{align*}
+    \premise{\exists a: P\bound{a}}\\
+    \premise{[P\bound{b}] \cdots Q}\\
+    \bydefinition{\neg(\forall a: \neg P\bound{a})}\\
+    \assumption[1]{\neg Q}\\
+    \assumption[2]{P\bound{b}}\\
+    \given[2]{Q}\\
+    \byrule[2]{\bot}{\ref{rule:negation-elimination}}\\
+    \byrule[1]{\neg P\bound{b}}{\ref{rule:negation-introduction}}\\
+    \byrule[1]{\forall a: \neg P\bound{a}}{\ref{rule:universal-introduction}}\\
+    \byrule[1]{\bot}{\ref{rule:negation-elimination}}\\
+    \byrule{Q}{\ref{rule:reductio-ad-absurdum}}
+\end{align*}
+\begin{equation}
+    \inferrule{\exists a: P\bound{a} \\ [P\bound{b}] \cdots Q}{Q}
+    \tag{{$\exists$}E}
+    \label{rule:existential-elimination}
+\end{equation}
+
+\begin{align*}
+    \premise{\exists a: P\bound{a}}\\
+    \premise{[P\bound{b}] \cdots Q\bound{b}}\\
+    \assumption[1]{P\bound{b}}\\
+    \given[1]{Q\bound{b}}\\
+    \byrule[1]{\exists a: Q\bound{a}}{\ref{rule:existential-introduction}}\\
+    \byrule{\exists a: Q\bound{a}}{\ref{rule:existential-elimination}}
+\end{align*}
+\begin{equation}
+    \inferrule{\exists a: P\bound{a} \\ [P\bound{b}] \cdots Q\bound{b}}{\exists a: Q\bound{a}}
+    \label{rule:existential-monotonicity}
+\end{equation}
+
 %% All of this again to introduce punctuation intuitively.
 %\begin{foundation}
 %    %\[\inferrule{P\bound{a}}{\exists b: P\bound{b}} \quad (\existsI)\]

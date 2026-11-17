@@ -126,11 +126,25 @@
     \byrule{P\bound{b} \implies P\bound{a}}{\ref{rule:conditional-introduction}}\\
     \byrule{P\bound{a} \lequiv P\bound{b}}{\ref{rule:equivalence-introduction}}\\
     \byrule{Q \lequiv Q}{\ref{rule:equivalence-reflexivity}}\\
-    \byrule{(P\bound{a} \nor Q) \lequiv (P\bound{b} \nor Q)}{\ref{rule:equivalence-congruence}}\\
+    \byrule{(P\bound{a} \nor Q) \lequiv (P\bound{b} \nor Q)}{\ref{rule:nor-congruence}}\\
     \byrule{P\bound{b} \nor Q}{\ref{rule:equivalence-elimination}}
 \end{align*}
+\begin{align*}
+    \premise{a = b}\\
+    \premise{P \nor Q\bound{a}}\\
+    \assumption[1]{Q\bound{a}}\\
+    \byrule[1]{Q\bound{b}}{{=}Sub}\\
+    \byrule{Q\bound{a} \implies Q\bound{b}}{\ref{rule:conditional-introduction}}\\
+    \assumption[1]{Q\bound{b}}\\
+    \byrule[1]{Q\bound{a}}{=Sub}\\
+    \byrule{Q\bound{b} \implies Q\bound{a}}{\ref{rule:conditional-introduction}}\\
+    \byrule{Q\bound{a} \lequiv Q\bound{b}}{\ref{rule:equivalence-introduction}}\\
+    \byrule{P \lequiv P}{\ref{rule:equivalence-reflexivity}}\\
+    \byrule{(P \nor Q\bound{a}) \lequiv (P \nor Q\bound{b})}{\ref{rule:nor-congruence}}\\
+    \byrule{P \nor Q\bound{b}}{\ref{rule:equivalence-elimination}}
+\end{align*}
 \begin{equation}
-    \inferrule{a = b \\ P\bound{a} \nor Q}{P\bound{b} \nor Q}
+    \inferrule{a = b \\ P\bound{a} \nor Q}{P\bound{b} \nor Q} \quad \inferrule{a = b \\ P \nor Q\bound{a}}{P \nor Q\bound{b}}
     \tag{{$=$}Sub}
 \end{equation}
 

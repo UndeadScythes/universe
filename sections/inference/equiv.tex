@@ -67,8 +67,8 @@
 % P<=>Q > Q<=>P
 \begin{align*}
     \premise{P \lequiv Q}\\
-    \byrule{P \implies Q}{\ref{rule:equivalence-unpacking}}\\
     \byrule{Q \implies P}{\ref{rule:equivalence-unpacking}}\\
+    \byrule{P \implies Q}{\ref{rule:equivalence-unpacking}}\\
     \byrule{Q \lequiv P}{\ref{rule:equivalence-introduction}}
 \end{align*}
 \begin{equation}
@@ -84,8 +84,6 @@
     \byrule[1]{Q}{\ref{rule:equivalence-elimination}}\\
     \byrule[1]{R}{\ref{rule:equivalence-elimination}}\\
     \byrule{P \implies R}{\ref{rule:conditional-introduction}}\\
-    \byrule{R \lequiv Q}{\ref{rule:equivalence-symmetry}}\\
-    \byrule{Q \lequiv P}{\ref{rule:equivalence-symmetry}}\\
     \assumption[1]{R}\\
     \byrule[1]{Q}{\ref{rule:equivalence-elimination}}\\
     \byrule[1]{P}{\ref{rule:equivalence-elimination}}\\

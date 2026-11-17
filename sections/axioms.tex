@@ -1,7 +1,7 @@
 \section{Sense}
 \label{sec:axioms}
 
-\subsection{Infinity and separation}
+\subsection{Extensionality}
 
 % Hopefully to include the leanest set of axioms here.
 \begin{foundation}
@@ -18,17 +18,29 @@
 \end{notation}
 
 \begin{align*}
+    \premise{a \in b}\\
+    \premise{a \notin b}\\
+    \bydefinition{\neg (a \in b)}\\
+    \byrule{\bot}{\ref{rule:negation-elimination}}
+\end{align*}
+\begin{equation}
+    \inferrule{a \in b \\ a \notin b}{\bot}
+    \tag{{$\neg$}E}
+    \label{rule:notin-elimination}
+\end{equation}
+
+\begin{align*}
     \assumption[1]{(\forall c: c \notin a) \wedge (\forall c: c \notin b)}\\
     \byrule[1]{\forall c: c \notin a}{\ref{rule:conjunction-elimination}}\\
     \byrule[1]{d \notin a}{\ref{rule:universal-elimination}}\\
     \assumption[2]{d \in a}\\
-    \byrule[2]{\bot}{\ref{rule:negation-elimination}}\\
+    \byrule[2]{\bot}{\ref{rule:notin-elimination}}\\
     \byrule[2]{d \in b}{\ref{rule:deductive-explosion}}\\
     \byrule[1]{d \in a \implies d \in b}{\ref{rule:conditional-introduction}}\\
     \byrule[1]{\forall c: c \notin b}{\ref{rule:conjunction-elimination}}\\
     \byrule[1]{d \notin b}{\ref{rule:universal-elimination}}\\
     \assumption[2]{d \in b}\\
-    \byrule[2]{\bot}{\ref{rule:negation-elimination}}\\
+    \byrule[2]{\bot}{\ref{rule:notin-elimination}}\\
     \byrule[2]{d \in a}{\ref{rule:deductive-explosion}}\\
     \byrule[1]{d \in b \implies d \in a}{\ref{rule:conditional-introduction}}\\
     \byrule[1]{d \in a \lequiv d \in b}{\ref{rule:equivalence-introduction}}\\
@@ -40,6 +52,52 @@
     \byrule{\forall a, b: (((\forall c: c \notin a) \wedge (\forall c: c \notin b)) \implies a = b)}{\ref{rule:universal-introduction}}
 \end{align*}
 \begin{equation}
-    \vdash \forall a, b: (((\forall c: c \notin a) \wedge (\forall c: c \notin b)) \implies a = b)
+    \mathsf{EXT} \vdash \forall a, b: (((\forall c: c \notin a) \wedge (\forall c: c \notin b)) \implies a = b)
     \label{rule:empty-set-at-most-one}
+\end{equation}
+
+\subsection{Separation}
+
+\begin{foundation}
+    \begin{equation}
+        \vdash \forall a: \exists b: \forall c: (c \in b \lequiv (c \in a \wedge P\bound{c}))
+        \tag{$\mathsf{SEP}$}
+        \label{axiom:separation}
+    \end{equation}
+\end{foundation}
+
+\begin{notation}
+    \[a \neq b \coloneqq \neg (a = b)\]
+\end{notation}
+
+\begin{align*}
+    \premise{a = b}\\
+    \premise{a \neq b}\\
+    \bydefinition{\neg (a = b)}\\
+    \byrule{\bot}{\ref{rule:negation-elimination}}
+\end{align*}
+\begin{equation}
+    \inferrule{a = b \\ a \neq b}{\bot}
+    \tag{{$\neg$}E}
+    \label{rule:neq-elimination}
+\end{equation}
+
+\begin{align*}
+    \axiom{\forall a: \exists b: \forall c: (c \in b \lequiv (c \in a \wedge c \neq c))}{SEP}\\
+    \byrule{\exists b: \forall c: (c \in b \lequiv (c \in d \wedge c \neq c))}{\ref{rule:universal-elimination}}\\
+    \assumption[1]{\forall c: (c \in a \lequiv (c \in d \wedge c \neq c))}\\
+    \byrule[1]{f \in a \lequiv (f \in d \wedge f \neq f)}{\ref{rule:universal-elimination}}\\
+    \assumption[2]{f \in a}\\
+    \byrule[2]{f \in d \wedge f \neq f}{\ref{rule:equivalence-elimination}}\\
+    \byrule[2]{f \neq f}{\ref{rule:conjunction-elimination}}\\
+    \byrule[2]{\forall g: g = g}{\ref{rule:equality-reflexivity}}\\
+    \byrule[2]{f = f}{\ref{rule:universal-elimination}}\\
+    \byrule[2]{\bot}{\ref{rule:neq-elimination}}\\
+    \byrule[1]{f \notin a}{\ref{rule:negation-introduction}}\\
+    \byrule[1]{\forall b: b \notin a}{\ref{rule:universal-introduction}}\\
+    \byrule{\exists a: \forall b: b \notin a}{\ref{rule:existential-monotonicity}}\\
+\end{align*}
+\begin{equation}
+    \mathsf{SEP} \vdash \exists a: \forall b: b \notin a
+    \label{rule:empty-set-exists}
 \end{equation}

@@ -2,3 +2,21 @@
 \label{sec:sets}
 
 \subsection{Emptiness}
+
+\begin{align*}
+    \byrule{\forall a, b: (((\forall c: c \notin a) \wedge (\forall c: c \notin b)) \implies a = b)}{\ref{rule:empty-set-at-most-one}}\\
+    \byrule{\exists a: \forall c: c \notin a}{\ref{rule:empty-set-exists}}\\
+    \assumption[1]{\forall c: c \notin d}\\
+    \assumption[2]{\forall c: c \notin e}\\
+    \byrule[2]{(\forall c: c \notin d) \wedge (\forall c: c \notin e)}{\ref{rule:conjunction-introduction}}\\
+    \byrule[2]{((\forall c: c \notin d) \wedge (\forall c: c \notin e)) \implies d = e}{\ref{rule:universal-elimination}}\\
+    \byrule[2]{d = e}{\ref{rule:conditional-elimination}}\\
+    \byrule[1]{(\forall c: c \notin e) \implies d = e}{\ref{rule:conditional-introduction}}\\
+    \byrule[1]{\forall e: ((\forall c: c \notin e) \implies d = e)}{\ref{rule:universal-introduction}}\\
+    \byrule[1]{(\forall c: c \notin d) \wedge (\forall e: ((\forall c: c \notin e) \implies d = e))}{\ref{rule:conjunction-introduction}}\\
+    \byrule{\exists a: ((\forall c: c \notin a) \wedge \forall e: ((\forall c: c \notin e) \implies a = e))}{\ref{rule:existential-monotonicity}}
+\end{align*}
+\begin{equation}
+    \vdash \exists a: ((\forall c: c \notin a) \wedge \forall e: ((\forall c: c \notin e) \implies a = e))
+    \label{rule:empty-set-unique}
+\end{equation}
