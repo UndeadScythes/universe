@@ -13,10 +13,45 @@
     \byrule[2]{d = e}{\ref{rule:conditional-elimination}}\\
     \byrule[1]{(\forall c: c \notin e) \implies d = e}{\ref{rule:conditional-introduction}}\\
     \byrule[1]{\forall e: ((\forall c: c \notin e) \implies d = e)}{\ref{rule:universal-introduction}}\\
-    \byrule[1]{(\forall c: c \notin d) \wedge (\forall e: ((\forall c: c \notin e) \implies d = e))}{\ref{rule:conjunction-introduction}}\\
-    \byrule{\exists a: ((\forall c: c \notin a) \wedge \forall e: ((\forall c: c \notin e) \implies a = e))}{\ref{rule:existential-monotonicity}}
+    \byrule[1]{(\forall b: b \notin d) \wedge (\forall c: ((\forall b: b \notin c) \implies d = c))}{\ref{rule:conjunction-introduction}}\\
+    \byrule{\exists a: ((\forall b: b \notin a) \wedge \forall c: ((\forall b: b \notin c) \implies a = c))}{\ref{rule:existential-monotonicity}}
 \end{align*}
 \begin{equation}
-    \vdash \exists a: ((\forall c: c \notin a) \wedge \forall e: ((\forall c: c \notin e) \implies a = e))
+    \vdash \exists a: ((\forall b: b \notin a) \wedge \forall c: ((\forall b: b \notin c) \implies a = c))
     \label{rule:empty-set-unique}
 \end{equation}
+
+\begin{notation}
+    \[\exists! a: P\bound{a} \coloneqq \exists a: (P\bound{a} \wedge \forall b: (P\bound{b} \implies a = b))\]
+\end{notation}
+
+\begin{foundation}
+    \begin{equation}
+        \inferrule{\exists! a: P\bound{a}}{R\bound{\iota a: P\bound{a}}}
+        \label{rule:iota-introduction}
+    \end{equation}%exists! P(a) > forall b (b = (ia P(a)) <=> P(b)) ---- then derive THIS rule from it along with eists! a:P(a) // [P(b)] ... R(b) > R(ia:P(a)) ---- then use those to just create the extra-level-wizardry below
+\end{foundation}
+
+\begin{notation}
+    \[\varnothing \coloneqq \iota a: (\forall b: b \notin a)\]
+\end{notation}
+
+\begin{align*}
+    \byrule{\exists a: ((\forall b: b \notin a) \wedge \forall c: ((\forall b: b \notin c) \implies a = c))}{\ref{rule:empty-set-unique}}\\
+    \bydefinition{\exists! a: (\forall b: b \notin a)}\\
+    \byrule{(\forall b: b \notin a) \wedge \forall c: ((\forall b: b \notin c) \implies a = c)}{\ref{rule:existential-elimination}}\\
+    \byrule{\forall b: b \notin a}{\ref{rule:conjunction-elimination}}\\
+    \byrule{\forall b: b \notin \varnothing}{\ref{rule:iota-introduction}}
+\end{align*}
+\begin{align*}
+    \byrule{\exists a: ((\forall b: b \notin a) \wedge \forall c: ((\forall b: b \notin c) \implies a = c))}{\ref{rule:empty-set-unique}}\\
+    \bydefinition{\exists! a: (\forall b: b \notin a)}\\
+    \byrule{(\forall b: b \notin a) \wedge \forall c: ((\forall b: b \notin c) \implies a = c)}{\ref{rule:existential-elimination}}\\
+    \byrule{\forall c: ((\forall b: b \notin c) \implies a = c)}{\ref{rule:conjunction-elimination}}\\
+    \byrule{(\forall b: b \notin d) \implies a = d}{\ref{rule:universal-elimination}}\\
+    \byrule{(\forall b: b \notin d) \implies \varnothing = d}{\ref{rule:iota-introduction}}
+\end{align*}
+\begin{align}
+    &\vdash \forall b: b \notin \varnothing \label{rule:empty-set}\\
+    &\vdash (\forall b: b \notin d) \implies \varnothing = d \label{rule:empty-set}
+\end{align}
